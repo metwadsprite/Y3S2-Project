@@ -10,7 +10,7 @@ WORKDIR /src
 COPY ["GASF.csproj", "./"]
 RUN dotnet restore "GASF.csproj"
 COPY . .
-WORKDIR "/src/"
+WORKDIR /src
 RUN dotnet build "GASF.csproj" -c Release -o /app/build
 
 FROM build AS publish
