@@ -30,14 +30,11 @@ This will be an improvement both for faculty employees and for students.
 ## 1.5 Overview
 This document follows the IEEE standard. It has three parts:
 
-1. Introduction
-
+##### 1. Introduction 
 Information about the scope of the SRS and of the project.
 
-2. Overall Description
-
+##### 2. Overall Description 
 Description of the system.
 
-3. Specific requirements 
-
+##### 3. Specific requirements 
 Requirements of the software system.
