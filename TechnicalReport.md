@@ -15,10 +15,10 @@
 2)	 Having initially a predefined set of rights, allowing differentiated access to data.
 3)	 The data collected by the user will be collected through the web interface.
 4)	 The user will be able to make changes, create and generate reports accordingly with the rights allocated.
-5)	 The documents can be searched  
-          *	according to the type of file searched
-          * after the date of creation,
-          *	after the author of the document 
+5)	 The documents can be searched:
+          *	according to the type of file searched;
+          * after the date of creation;
+          *	after the author of the document; 
           * after the content of the document.
 6)	The data will be displayed on the web page as a table
 7)	The data can be saved in a format standard: CSV, XML or XLS.
