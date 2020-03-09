@@ -11,19 +11,19 @@
 
 #### Functionalities of the web site:
 
-1.	 A user of the system must be able to register through the web interface.
-2.	 Having initially a predefined set of rights, allowing differentiated access to data.
-3.	 The data collected by the user will be collected through the web interface.
-4.	 The user will be able to make changes, create and generate reports accordingly with the rights allocated.
-5.	 The documents can be searched  
+1)	 A user of the system must be able to register through the web interface.
+2)	 Having initially a predefined set of rights, allowing differentiated access to data.
+3)	 The data collected by the user will be collected through the web interface.
+4)	 The user will be able to make changes, create and generate reports accordingly with the rights allocated.
+5)	 The documents can be searched  
           *	according to the type of file searched
           * after the date of creation,
           *	after the author of the document 
           * after the content of the document.
-6.	The data will be displayed on the web page as a table
-7.	The data can be saved in a format standard: CSV, XML or XLS.
-8.	The system will allow the definition of user groups and the execution of operations at group level (for example: sending emails to all group members).
-9.	Data validation will be performed in the module that implements the user interface and will generate error messages, and frequent error cases will suggest ways to resolve them.
+6)	The data will be displayed on the web page as a table
+7)	The data can be saved in a format standard: CSV, XML or XLS.
+8)	The system will allow the definition of user groups and the execution of operations at group level (for example: sending emails to all group members).
+9)	Data validation will be performed in the module that implements the user interface and will generate error messages, and frequent error cases will suggest ways to resolve them.
 
 
 #### Data base requirements:
