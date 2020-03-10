@@ -1,4 +1,4 @@
-### 2.2	Product functions
+## 2.2	Product functions
 
 1) The user interface is accessible through a web site with differentiated and secured access for different user roles.
 2)  The data from the web site are easy to view and to locate 
@@ -36,9 +36,9 @@
 7.	users and groups of users with different types of access, 
 8.	monitoring all types of queries,
 9.	implementing complex data structures.
-10.	stocks can be seen in ìlogî transactions for all activities in the sistem. For each activity it can be identified the user that has realized the action and all the relevant data of the accessed / modified information.
+10.	stocks can be seen in ‚Äúlog‚Äù transactions for all activities in the sistem. For each activity it can be identified the user that has realized the action and all the relevant data of the accessed / modified information.
 
-### 2.3	User characteristics
+## 2.3	User characteristics
 
 The users of this web site should be students, teachers or official representatives of a university or teaching academy.
 
