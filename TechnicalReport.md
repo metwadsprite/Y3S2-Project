@@ -1,4 +1,4 @@
-2.4  Constraints
+####2.4   Constraints
 
 Constraints, included in Section 2.4 of the SRS, are items that describe any properties that will limit the developers’ options.
 
@@ -19,7 +19,7 @@ Therefore, the web applications will be implemented to run on the server side as
 
  1: The system shall be in compliance with all Accessibility, Web Design, and Security Policies applicable.
 
- 2:The system shall use the current corporate standard MySQL Server database engine.     
+ 2:The system shall use the current corporate standard Microsoft SQL Server database engine.     
 
  3: Database Design: The database structure should be as complete as possible during the design stage but there should be a room for modification without a large overhaul during later phases.
 
@@ -30,7 +30,7 @@ Therefore, the web applications will be implemented to run on the server side as
  6: The Internet connection is also a constraint for the application. Since the application  etches data from the database over the Internet, it is crucial that there is an Internet connection for the application to function.
 
 
-2.5 Assumptions and dependencies
+####2.5    Assumptions and dependencies
 
  1: The users have sufficient knowledge of computers and android devices.
 
@@ -43,4 +43,4 @@ Therefore, the web applications will be implemented to run on the server side as
  5:The users know the English language, as the user interface will be provided in English SMS gateway services for Notification purposes  
 
  6:The application is used on a computer with enough performance
- ability. If the computer does not have enough performance to support the app's back-end, then there may be scenarios where the application does not work as intended. This could cause performance and usability issues for the user. 
+ ability. If the computer does not have enough performance to support the app's back-end, then there may be scenarios where the application does not work as intended. This could cause performance and usability issues for the user.
