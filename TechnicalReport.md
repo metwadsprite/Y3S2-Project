@@ -1,4 +1,4 @@
-####2.4   Constraints
+#### 2.4   Constraints
 
 Constraints, included in Section 2.4 of the SRS, are items that describe any properties that will limit the developers’ options.
 
@@ -30,7 +30,7 @@ Therefore, the web applications will be implemented to run on the server side as
  6: The Internet connection is also a constraint for the application. Since the application  etches data from the database over the Internet, it is crucial that there is an Internet connection for the application to function.
 
 
-####2.5    Assumptions and dependencies
+#### 2.5    Assumptions and dependencies
 
  1: The users have sufficient knowledge of computers and android devices.
 
