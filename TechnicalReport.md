@@ -26,6 +26,7 @@
 9)	Data validation will be performed in the module that implements the user interface and will generate error messages, and frequent error cases will suggest ways to resolve them.
 
 
+
 #### Data base requirements:
 1.	the database should allow the management of a large amount of data on the school situation of a student.
 2.	the database management system must allow:
