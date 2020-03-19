@@ -4,6 +4,8 @@ The user interface is accessible through a web site with differentiated and secu
 
 
 The system contains the following modules: the module for data collection, the reporting module, the operations logging module.
+
+
 A user of the system must be able to register through the web interface. We have three types of users (students, teachers and secretaries) having initially a predefined set of rights, allowing differentiated access to data. The user will be able to make changes, create and generate reports accordingly with the rights allocated.
 
 
