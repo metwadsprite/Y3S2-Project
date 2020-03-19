@@ -14,4 +14,3 @@ The users of this web site are students, teachers and official representatives o
 Students use the application to see their academical situation. Each student sees here their grades for each course they took, the credits of that course, the situation of their scholarship, the situation of their college fees.
 Teachers use the application to post the grades of their students. Each teacher will have an account where he can see the courses that he is teaching and the students that are taking these classes.
 A secretary is an official representative of a university and she is the one that collects information about the students and makes reports with collected information.
-
