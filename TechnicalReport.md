@@ -130,7 +130,7 @@ from technical limitations imposed by the chosen design components, e.g. the int
 
 Therefore, the web applications will be implemented to run on the server side as much as possible. Also, it is required to test the application using different platforms, connection speeds, screen settings, colors/graphics, and browsers.
 
- 1. The system shall be in compliance with all Accessibility, Web Design, and Security Policies applicable.
+ 1. The system shall be in compliance with all Accessibility[1], Web Design, and Security[2] and Privacy[3] Policies applicable.
 
  2. The system shall use the current corporate standard Microsoft SQL Server database engine.     
 
@@ -141,6 +141,12 @@ Therefore, the web applications will be implemented to run on the server side as
  5.  As part of standard operating procedures, a testing plan will be documented during the Design phase. The testing plan will be based on user roles, modules or use cases, required tasks and expected outcomes.
 
  6. The Internet connection is also a constraint for the application. Since the application  etches data from the database over the Internet, it is crucial that there is an Internet connection for the application to function.
+ 
+ #### References
+ [1]. https://www.w3.org/WAI/fundamentals/accessibility-intro/#context
+ [2]. https://www.upenn.edu/npc-info/pending/draft-20180418-webappsec.html
+ [3]. https://www.privacypolicies.com/blog/privacy-policies-legally-required/#Privacy_Laws_In_The_Eu
+ 
 
 
 ## 2.5    Assumptions and dependencies
