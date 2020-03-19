@@ -11,6 +11,15 @@ Every user have a profile page with some important informations about him/ her.
 
 Stdents will have a page with their school situation.
 ![GASF system](wwwroot/images/situation.png)
+
+Teachers will have a page with their subjects, and for each of it the groups that have that subject. When the teacher press select, another interface will be opened.
+![GASF system](wwwroot/images/subjects.png)
+
+The interface that appears after the teacher press the select button, will be similar with the one in the below picture. Here the teacher introduces students grades.
+![GASF system](wwwroot/images/group.png)
+
+The secretary can add/ edit students, view students and teachers and generate reports about them.
+![GASF system](wwwroot/images/secretary.png)
 ### 3.1.2 Hardware Interfaces
 The system requires an architecture x86 in order to work properly.
 ### 3.1.3 Software Interfaces
