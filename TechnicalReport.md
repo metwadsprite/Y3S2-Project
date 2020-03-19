@@ -144,7 +144,9 @@ Therefore, the web applications will be implemented to run on the server side as
  
  #### References
  [1]. https://www.w3.org/WAI/fundamentals/accessibility-intro/#context
+ 
  [2]. https://www.upenn.edu/npc-info/pending/draft-20180418-webappsec.html
+ 
  [3]. https://www.privacypolicies.com/blog/privacy-policies-legally-required/#Privacy_Laws_In_The_Eu
  
 
