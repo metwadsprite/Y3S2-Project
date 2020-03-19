@@ -25,7 +25,7 @@ Data validation will be performed in the module that implements the user interfa
 The users of this web site are students, teachers and official representatives of a university (secretaries). Each of them have a predefined set of rights, allowing differentiated access to data.
 
 
-Students use the application to see their academical situation. Each student sees here their grades for each course they took, the credits of that course, the situation of their scholarship, the situation of their college fees.
+Students use the application to see their academical situation. Each student sees here his grades for each course they took, the credits of that course, the situation of their scholarship, the situation of his college fees.
 
 
 Teachers use the application to post the grades of their students. Each teacher will have an account where he can see the courses that he is teaching and the students that are taking these classes.
