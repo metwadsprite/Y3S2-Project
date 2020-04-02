@@ -1,3 +1,5 @@
+![.NET Core](https://github.com/metwadsprite/Y3S2-Project/workflows/.NET%20Core/badge.svg)
+
 # Sistem informatic pentru gestiunea automată a studenților facultății (GASF)
 ### Membrii echipa:
 * Stoian Andreea-Maria
