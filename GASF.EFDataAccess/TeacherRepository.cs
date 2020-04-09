@@ -8,7 +8,6 @@ namespace GASF.EFDataAccess
 {
     class TeacherRepository : BaseRepository<Teacher>, ITeacherRepository
     {
-
         public TeacherRepository(StudentRecordDbContext dbContext) : base(dbContext)
         {
 
