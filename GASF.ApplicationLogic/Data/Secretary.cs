@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GASF.ApplicationLogic.Data
 {
-    class Secretary
+    public class Secretary
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; }

@@ -4,12 +4,12 @@ using System.Text;
 
 namespace GASF.ApplicationLogic.Data
 {
-    class GroupsCourses
+    public class GroupsCourses
     {
        
         public Course Course { get; set; } 
 
-        public int CourseId { get; set; }
+        public Guid CourseId { get; set; }
 
         public Group Group { get; set; }
 

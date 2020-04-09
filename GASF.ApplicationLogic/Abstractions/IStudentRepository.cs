@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using GASF.ApplicationLogic.Data;
 
 namespace GASF.ApplicationLogic.Abstractions
 {
-    class IStudentRepository : IRepository<Student>
+    public interface IStudentRepository : IRepository<Student>
     {
         Student GetStudentById(Guid Id);
 

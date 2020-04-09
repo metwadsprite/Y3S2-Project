@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GASF.ApplicationLogic.Data
 {
-    class Grade
+    public class Grade
     {
         public Guid Id { get; set; }
         public int Score { get; set; }
