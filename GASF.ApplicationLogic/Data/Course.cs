@@ -12,6 +12,6 @@ namespace GASF.ApplicationLogic.Data
         public Guid TeacherId { get; set; }
         public Teacher Teacher { get; set; }
         public Exam Exam { get; set; }
-        public ICollection<GroupsCourse> GroupsCourses { get; set; }
+        public ICollection<GroupsCourses> GroupsCourses { get; set; }
     }
 }

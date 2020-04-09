@@ -8,5 +8,6 @@ namespace GASF.ApplicationLogic.Abstractions
     interface IGradeRepository : IRepository<Grade>
     {
         Grade GetStudentGrade(Guid examId, Guid studentId);
+        ICollection<Grade> GetStudentGrades(Guid studentId);
     }
 }

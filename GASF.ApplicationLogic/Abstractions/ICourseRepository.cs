@@ -9,5 +9,6 @@ namespace GASF.ApplicationLogic.Abstractions
     {
         ICollection<Course> GetTeacherCourses(Guid teacherId);
         ICollection<Course> GetGroupCourses(Guid grouId);
+        Course GetCourseByName(string name);
     }
 }

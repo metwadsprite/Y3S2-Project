@@ -9,5 +9,6 @@ namespace GASF.ApplicationLogic.Abstractions
     {
         ICollection<Exam> GetGroupExams(Guid groupId);
         ICollection<Exam> GetTeacherExams(Guid teacherId);
+        ICollection<Exam> GetExamByDate(DateTime date);
     }
 }
