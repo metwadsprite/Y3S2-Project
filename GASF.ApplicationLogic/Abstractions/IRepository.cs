@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GASF.ApplicationLogic.Abstractions
 {
-    interface IRepository<T>
+    public interface IRepository<T>
     {
         IEnumerable<T> GetAll();
         T GetById(Guid id);

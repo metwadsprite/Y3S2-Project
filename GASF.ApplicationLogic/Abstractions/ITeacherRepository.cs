@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using GASF.ApplicationLogic.Data;
 
 namespace GASF.ApplicationLogic.Abstractions
 {
-    class ITeacherRepository : IRepository<Teacher>
+    public interface ITeacherRepository : IRepository<Teacher>
     {
         Teacher GetTeacherByName(string LastName);
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GASF.ApplicationLogic.Abstractions
 {
-    class ISecretaryRepository : IRepository<Secretary>
+    public interface ISecretaryRepository : IRepository<Secretary>
     {
         ICollection<Secretary> GetSecretaryById(Guid Id);
 

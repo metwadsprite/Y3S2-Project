@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Text.RegularExpressions;
+using GASF.ApplicationLogic.Data;
 
 namespace GASF.ApplicationLogic.Abstractions
 {
-    public interface IGroupRepository : IRpository<Group>
+    public interface IGroupRepository : IRepository<Group>
     {
         ICollection<Group> GetStudentFromGroup(Guid studentId);
 

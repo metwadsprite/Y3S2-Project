@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GASF.ApplicationLogic.Data
 {
-    class Exam
+    public class Exam
     {
         public Guid Id { get; set; }
         public DateTime Date { get; set; }

@@ -13,4 +13,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GASF.ApplicationLogic\GASF.ApplicationLogic.csproj" />
+  </ItemGroup>
+
 </Project>
