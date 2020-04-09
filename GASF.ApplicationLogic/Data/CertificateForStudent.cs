@@ -11,10 +11,10 @@ namespace GASF.ApplicationLogic.Data
 
         public String Message { get; set; }
 
-        public int IdStudent { get; set; }
+        public Guid IdStudent { get; set; }
         public Student Student { get; set; }
 
-        public int IdSecretary { get; set; }
+        public Guid IdSecretary { get; set; }
 
         public Secretary Secretary { get; set; }
     }
