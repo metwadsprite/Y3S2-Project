@@ -13,6 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using GASF.EFDataAccess;
+using GASF.ApplicationLogic.Services;
+using GASF.ApplicationLogic.Abstractions;
 
 namespace GASF
 {
@@ -38,6 +40,13 @@ namespace GASF
             
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddScoped<ITeacherRepository, TeacherRepository>();
+            services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<IGradeRepository, GradeRepository>();
+            services.AddScoped<StudentService>();
+           
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

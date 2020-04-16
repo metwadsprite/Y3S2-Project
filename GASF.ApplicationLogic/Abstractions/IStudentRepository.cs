@@ -13,7 +13,7 @@ namespace GASF.ApplicationLogic.Abstractions
 
         Student GetStudentByCNP(string CNP);
 
-        ICollection<Student> GetStudentByGroupId(Guid GropupId);
+       // ICollection<Student> GetStudentByGroupId(Guid GropupId);
 
     }
 }

@@ -2,11 +2,12 @@
 using GASF.ApplicationLogic.Data;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace GASF.EFDataAccess
 {
-    class TeacherRepository : BaseRepository<Teacher>, ITeacherRepository
+    public class TeacherRepository : BaseRepository<Teacher>, ITeacherRepository
     {
         public TeacherRepository(StudentRecordDbContext dbContext) : base(dbContext)
         {
