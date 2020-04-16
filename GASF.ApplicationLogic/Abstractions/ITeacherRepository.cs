@@ -8,7 +8,7 @@ namespace GASF.ApplicationLogic.Abstractions
     public interface ITeacherRepository : IRepository<Teacher>
     {
         Teacher GetTeacherByName(string LastName);
-
         Teacher GetTeacherById(Guid Id);
+        Teacher GetTeacherByUserId(Guid userIdGuid);
     }
 }

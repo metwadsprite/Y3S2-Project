@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GASF.EFDataAccess
 {
-    class CourseRepository : BaseRepository<Course>, ICourseRepository
+    public class CourseRepository : BaseRepository<Course>, ICourseRepository
     {
         public CourseRepository(StudentRecordDbContext dbContext) : base(dbContext)
         {
