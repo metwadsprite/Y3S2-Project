@@ -31,5 +31,12 @@ namespace GASF.EFDataAccess
                             .Where(student => student.CNP == CNP)
                             .SingleOrDefault();
         }
+
+         public ICollection<Student> GetStudentByGroupId(Guid GropupId)
+        {
+             return dbContext.Students
+                              .Where(student => student.Group.GroupId == GropupId)
+                              .ToList();
+        }
     }
 }
