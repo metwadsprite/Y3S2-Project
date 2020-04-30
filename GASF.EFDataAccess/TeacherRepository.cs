@@ -20,10 +20,10 @@ namespace GASF.EFDataAccess
                             .SingleOrDefault();
         }
 
-        public Teacher GetTeacherByName(string LastName)
+        public Teacher GetTeacherByName(string LastName, string FirstName)
         {
             return dbContext.Teachers
-                            .Where(teacher => teacher.LastName == LastName)
+                            .Where(teacher => teacher.LastName == LastName && teacher.LastName == FirstName )
                             .SingleOrDefault();
         }
 

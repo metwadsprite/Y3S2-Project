@@ -33,7 +33,6 @@ namespace GASF.Controllers
                 var userId = userManager.GetUserId(User);
                 Teacher teacher = teacherService.GetTeacherByUserId(userId);
                 IEnumerable<Course> teacherCourses = teacherService.GetCourses(userId);
-
                 return View(new TeacherCoursesViewModel { Teacher = teacher, Courses = teacherCourses });
             }
             catch (Exception)
@@ -41,13 +40,11 @@ namespace GASF.Controllers
                 return BadRequest("Invalid request received ");
             }
         }
-
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
-
         [HttpPost]
         public IActionResult Create([FromForm]TeacherAddCourseViewModel model)
         {
