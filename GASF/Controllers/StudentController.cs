@@ -30,37 +30,17 @@ namespace GASF.Controllers
             try
             {
                 var userId = userManager.GetUserId(User);
-                var student = studentService.GetStudentById(userId);
-                var studentCourses = studentService.GetStudentCourses(userId);
+                var student = studentService.GetByUserId(userId);
+                var studentCourses = studentService.GetStudentCourses(student.Id.ToString());
+                var studentGrades = studentService.GetStudentGrade(student.Id.ToString());
+                var schoolFee = studentService.GetSchoolFee(student.Id.ToString());
 
-                var studentGrades = studentService.GetStudentGrade(userId);
-
-                return View(new StudentCoursesViewModel { Student = student, Courses = studentCourses, Grades = studentGrades });
+                return View(new StudentCoursesViewModel { Student = student, Courses = studentCourses, Grades = studentGrades, SchoolFee = schoolFee });
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return BadRequest("Invalid request received ");
             }
-        }
-
-        [HttpGet]
-        public IActionResult AddCourse()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult AddCourse([FromForm]StudentAddCourseViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            var userId = userManager.GetUserId(User);
-            studentService.AddCourse(userId, model.Name, model.Description);
-            return Redirect(Url.Action("Index", "Teacher"));
-
         }
 
 
@@ -73,13 +53,13 @@ namespace GASF.Controllers
             }
             Course gradeView = new Course();
             var userId = userManager.GetUserId(User);
-            var student = studentService.GetStudentById(userId);
+            var student = studentService.GetByUserId(userId);
             //IEnumerable<Course> courses = studentService.GetStudentCourses(userId);
             IEnumerable<Grade> grades = studentService.GetStudentGrade(userId);
 
-            
+
             gradeView.Grades = grades;
-         
+
             if (student == null)
             {
                 return NotFound();

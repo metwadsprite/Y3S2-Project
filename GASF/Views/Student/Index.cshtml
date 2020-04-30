@@ -1,0 +1,18 @@
+﻿@model GASF.Models.Students.StudentCoursesViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<h1>Courses</h1>
+@foreach (var course in Model.Courses)
+{
+    <p> @course.Name </p>
+    
+}
+<h1>Grades</h1>
+@foreach (var grade in Model.Grades)
+{
+    <p> @grade.Score</p>
+}

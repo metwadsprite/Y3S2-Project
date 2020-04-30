@@ -25,7 +25,7 @@ namespace GASF.ApplicationLogic.Services
             this.gradeRepository = gradeRepository;
         }
 
-        public Student GetStudentById(string Id)
+        public Student GetByUserId(string Id)
         {
             Guid userIdGuid = Guid.Empty;
             if (!Guid.TryParse(Id, out userIdGuid))
@@ -33,15 +33,16 @@ namespace GASF.ApplicationLogic.Services
                 throw new Exception("Invalid Guid Format");
             }
 
-            var teacher = studentRepository.GetStudentById(userIdGuid);
-            if (teacher == null)
+            var student = studentRepository.GetByUserId(userIdGuid);
+
+            if (student == null)
             {
                 throw new EntityNotFoundException(userIdGuid);
             }
 
-            return teacher;
+            return student;
         }
-        
+
         public IEnumerable<Course> GetStudentCourses(string userId)
         {
             Guid userIdGuid = Guid.Empty;
@@ -50,9 +51,7 @@ namespace GASF.ApplicationLogic.Services
                 throw new Exception("Invalid Guid Format");
             }
 
-            return courseRepository.GetAll()
-                            .Where(course => course.Teacher != null && course.Teacher.Id == userIdGuid)
-                            .AsEnumerable();
+            return studentRepository?.GetStudentCourses(userIdGuid);
         }
 
 
@@ -63,26 +62,19 @@ namespace GASF.ApplicationLogic.Services
             {
                 throw new Exception("Invalid Guid Format");
             }
-
-            return gradeRepository.GetAll()
-                            .Where(score => score.Student!= null && score.Student.Id == userIdGuid)
-                            .AsEnumerable();
+            return studentRepository?.GetStudentGrades(userIdGuid);
         }
 
-
-        public void AddCourse(string userId, string courseName, string courseDescription)
+        public SchoolFee GetSchoolFee(string id)
         {
             Guid userIdGuid = Guid.Empty;
-            if (!Guid.TryParse(userId, out userIdGuid))
+
+            if (!Guid.TryParse(id, out userIdGuid))
             {
                 throw new Exception("Invalid Guid Format");
             }
-            var teacher = studentRepository.GetStudentById(userIdGuid);
-            if (teacher == null)
-            {
-                throw new EntityNotFoundException(userIdGuid);
-            }
-            courseRepository.Add(new Course() { Id = Guid.NewGuid(), Name = courseName, Description = courseDescription });
+
+            return studentRepository?.GetSchoolFee(userIdGuid);
         }
     }
 }
