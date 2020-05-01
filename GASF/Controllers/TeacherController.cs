@@ -11,6 +11,8 @@ using GASF.EFDataAccess;
 using GASF.Models.Courses;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Routing;
+using GASF.Models.Exams;
 
 namespace GASF.Controllers
 {
@@ -39,6 +41,36 @@ namespace GASF.Controllers
             {
                 return BadRequest("Invalid request received ");
             }
+        }
+        [HttpGet]
+        public IActionResult Exams()
+        {
+            try
+            {
+                var userId = userManager.GetUserId(User);
+                Teacher teacher = teacherService.GetTeacherByUserId(userId);
+                IEnumerable<Exam> exams = teacherService.GetExams(teacher.Id.ToString());
+                return View(new TeacherExamViewModel { Teacher = teacher, Exams = exams });
+            }
+            catch (Exception)
+            {
+                return BadRequest("Invalid request received ");
+            }
+        }
+        [HttpGet]
+        public IActionResult ExamCreate()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult ExamCreate([FromForm]Exam exam)
+        {
+            if (ModelState.IsValid)
+            {
+                teacherService.AddExam(exam.Course.Name, exam.Date);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(exam);
         }
         [HttpGet]
         public IActionResult Create()

@@ -12,13 +12,24 @@ namespace GASF.ApplicationLogic.Services
     {
         private ITeacherRepository teacherRepository;
         private ICourseRepository courseRepository;
+        private IExamRepository examRepository;
 
-        public TeacherService(ITeacherRepository teacherRepository, ICourseRepository courseRepository)
+        public TeacherService(ITeacherRepository teacherRepository, ICourseRepository courseRepository, IExamRepository examRepository)
         {
             this.teacherRepository = teacherRepository;
             this.courseRepository = courseRepository;
+            this.examRepository = examRepository;
         }
+        public Teacher GetById(string id)
+        {
+            Guid idGuid = Guid.Empty;
+            if (!Guid.TryParse(id, out idGuid))
+            {
+                throw new Exception("Invalid Guid Format");
+            }
 
+            return teacherRepository.GetTeacherById(idGuid);
+        }
         public IEnumerable<Course> GetCourses(string userId)
         {
             Guid userIdGuid = Guid.Empty;
@@ -31,7 +42,18 @@ namespace GASF.ApplicationLogic.Services
                             .Where(course => course.Teacher != null && course.Teacher.UserId == userIdGuid)
                             .AsEnumerable();
         }
+        public IEnumerable<Exam> GetExams(string userId)
+        {
+            Guid userIdGuid = Guid.Empty;
+            if (!Guid.TryParse(userId, out userIdGuid))
+            {
+                throw new Exception("Invalid Guid Format");
+            }
 
+            return examRepository.GetAll()
+                            .Where(exam => exam.Course.Teacher != null && exam.Course.Teacher.UserId == userIdGuid)
+                            .AsEnumerable();
+        }
         public Teacher GetTeacherByUserId(string userId)
         {
             Guid userIdGuid = Guid.Empty;
@@ -55,6 +77,11 @@ namespace GASF.ApplicationLogic.Services
                 throw new EntityNotFoundException(userIdGuid);
             }
             courseRepository.Add(new Course() { Id = Guid.NewGuid(), Teacher = teacher, Name = courseName, Description = courseDescription });
+        }
+        public void AddExam(string courseName, DateTime date)
+        {
+            Course course = courseRepository.GetCourseByName(courseName);
+            examRepository.Add(new Exam() { Id = Guid.NewGuid(), Course = course, Date = date});
         }
     }
 }
