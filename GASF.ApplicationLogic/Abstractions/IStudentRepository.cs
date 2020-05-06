@@ -13,7 +13,8 @@ namespace GASF.ApplicationLogic.Abstractions
 
         Student GetStudentByCNP(string CNP);
 
-        SchoolFee GetSchoolFee(Guid id);
+      //  SchoolFee GetSchoolFee(Guid id);
+        IEnumerable< SchoolFee> GetSchoolFee(Guid id);
 
         IEnumerable<Course> GetStudentCourses(Guid id);
 

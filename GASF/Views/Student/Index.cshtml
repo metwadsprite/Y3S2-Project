@@ -3,16 +3,83 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+
+<br />
 
 <h1>Courses</h1>
-@foreach (var course in Model.Courses)
-{
-    <p> @course.Name </p>
-    
-}
+<br />
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th>📙Course Id </th>
+        <th>📙Name </th>
+        <th>📙<br />
+        Description</th>
+        <th>📙<br />
+        TeacherId</th>
+        <th>📙<br />
+        ExamId</th>
+    </tr>
+    @foreach (var d in Model.Courses)
+    {
+        <tr>
+            <td>@d.Id</td>
+            <td>@d.Name</td>
+            <td>@d.Description</td>
+            <td>@d.TeacherId</td>
+            <td>@d.ExamId</td>
+        </tr>
+
+    }
+</table>
+<br />
+
+
+
+
+
+<h1>SchoolFee</h1>
+<br />
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th>❗❗  SchoolFee Id </th>
+        <th>❗❗  Student </th>
+        <th>❗❗ Due Date</th>
+        <th>❗❗  Value</th>
+    </tr>
+    @foreach (var d in Model.SchoolFee)
+    {
+        <tr>
+            <td>@d.Id</td>
+            <td>@d.IdStudent</td>
+            <td>@d.DueDate</td>
+            <td>@d.Value</td>
+        </tr>
+
+    }
+</table>
+
+
+
+
+<br />
 <h1>Grades</h1>
-@foreach (var grade in Model.Grades)
-{
-    <p> @grade.Score</p>
-}
+<br />
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th>✔️ Grade Id </th>
+        <th>✔️ Score Grade </th>
+        <th>✔️ Exam Id</th>
+        <th>✔️ Student Id</th>
+     </tr>
+    @foreach (var d in Model.Grades)
+    {
+        <tr>
+            <td>@d.Id</td>
+            <td>@d.Score</td>
+            <td>@d.ExamId</td>
+            <td>@d.StudentId
+            </td>
+        </tr>
+
+    }
+</table>  

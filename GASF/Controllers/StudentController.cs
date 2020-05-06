@@ -67,5 +67,11 @@ namespace GASF.Controllers
 
             return View(gradeView);
         }
+
+        //[HttpGet]
+        //public IActionResult GetStudentCourses()
+        //{
+        //    return View();
+        //}
     }
 }
