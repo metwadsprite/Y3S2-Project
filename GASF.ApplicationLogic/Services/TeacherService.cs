@@ -49,9 +49,8 @@ namespace GASF.ApplicationLogic.Services
             {
                 throw new Exception("Invalid Guid Format");
             }
-
-            return examRepository.GetAll()
-                            .Where(exam => exam.Course.Teacher != null && exam.Course.Teacher.UserId == userIdGuid)
+            Teacher teacher = GetTeacherByUserId(userId);
+            return examRepository.GetTeacherExams(teacher.Id)
                             .AsEnumerable();
         }
         public Teacher GetTeacherByUserId(string userId)

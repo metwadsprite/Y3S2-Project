@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GASF.ApplicationLogic.Abstractions;
 using GASF.ApplicationLogic.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace GASF.EFDataAccess
 {
@@ -42,7 +43,7 @@ namespace GASF.EFDataAccess
 
         public IEnumerable<Exam> GetAll()
         {
-            return dbContext.Exams;
+            return dbContext.Exams.Include(exam => exam.Course);
         }
 
         public Exam GetById(Guid id)
@@ -60,9 +61,9 @@ namespace GASF.EFDataAccess
             throw new NotImplementedException();
         }
 
-        public ICollection<Exam> GetTeacherExams(Guid teacherId)
+        public IEnumerable<Exam> GetTeacherExams(Guid teacherId)
         {
-            throw new NotImplementedException();
+            return dbContext.Exams.Include(exam => exam.Course).Where(exam => exam.Course.Teacher.Id == teacherId);
         }
 
         public Exam Update(Exam itemToUpdate)

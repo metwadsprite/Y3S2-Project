@@ -49,7 +49,7 @@ namespace GASF.Controllers
             {
                 var userId = userManager.GetUserId(User);
                 Teacher teacher = teacherService.GetTeacherByUserId(userId);
-                IEnumerable<Exam> exams = teacherService.GetExams(teacher.Id.ToString());
+                IEnumerable<Exam> exams = teacherService.GetExams(userId);
                 return View(new TeacherExamViewModel { Teacher = teacher, Exams = exams });
             }
             catch (Exception)
