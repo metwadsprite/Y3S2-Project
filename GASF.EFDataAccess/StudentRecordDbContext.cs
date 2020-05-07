@@ -19,6 +19,8 @@ namespace GASF.EFDataAccess
         public DbSet<Secretary> Secretaries { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<GroupsCourses> GroupsCourses { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

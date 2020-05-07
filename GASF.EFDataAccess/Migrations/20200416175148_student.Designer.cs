@@ -4,14 +4,16 @@ using GASF.EFDataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GASF.EFDataAccess.Migrations
 {
     [DbContext(typeof(StudentRecordDbContext))]
-    partial class StudentRecordDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200416175148_student")]
+    partial class student
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,9 +44,6 @@ namespace GASF.EFDataAccess.Migrations
 
                     b.Property<Guid?>("StudentId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -79,9 +78,6 @@ namespace GASF.EFDataAccess.Migrations
                     b.Property<Guid?>("TeacherId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("SecretaryId");
@@ -100,13 +96,19 @@ namespace GASF.EFDataAccess.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("ExamId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("TeacherId")
+                    b.Property<Guid>("TeacherId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ExamId")
+                        .IsUnique();
 
                     b.HasIndex("TeacherId");
 
@@ -119,16 +121,10 @@ namespace GASF.EFDataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CourseId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CourseId")
-                        .IsUnique();
 
                     b.ToTable("Exams");
                 });
@@ -171,9 +167,6 @@ namespace GASF.EFDataAccess.Migrations
                     b.Property<string>("GroupName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Specialisation")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("GroupId");
 
                     b.ToTable("Groups");
@@ -185,9 +178,6 @@ namespace GASF.EFDataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CourseId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("GroupId", "CourseId");
@@ -240,9 +230,6 @@ namespace GASF.EFDataAccess.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.ToTable("Secretaries");
@@ -278,9 +265,6 @@ namespace GASF.EFDataAccess.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("GroupId");
@@ -308,9 +292,6 @@ namespace GASF.EFDataAccess.Migrations
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -341,16 +322,15 @@ namespace GASF.EFDataAccess.Migrations
 
             modelBuilder.Entity("GASF.ApplicationLogic.Data.Course", b =>
                 {
+                    b.HasOne("GASF.ApplicationLogic.Data.Exam", "Exam")
+                        .WithOne("Course")
+                        .HasForeignKey("GASF.ApplicationLogic.Data.Course", "ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("GASF.ApplicationLogic.Data.Teacher", "Teacher")
                         .WithMany("Courses")
-                        .HasForeignKey("TeacherId");
-                });
-
-            modelBuilder.Entity("GASF.ApplicationLogic.Data.Exam", b =>
-                {
-                    b.HasOne("GASF.ApplicationLogic.Data.Course", "Course")
-                        .WithOne("Exam")
-                        .HasForeignKey("GASF.ApplicationLogic.Data.Exam", "CourseId")
+                        .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

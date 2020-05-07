@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace GASF.EFDataAccess
 {
-    class GradeRepository : BaseRepository<Grade>, IGradeRepository
+    public class GradeRepository : BaseRepository<Grade>, IGradeRepository
     {
         public GradeRepository(StudentRecordDbContext dbContext) : base(dbContext)
         {
