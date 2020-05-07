@@ -6,7 +6,7 @@ namespace GASF.ApplicationLogic.Data
 {
     public class GroupsCourses
     {
-       
+        public Guid Id { get; set; }
         public Course Course { get; set; } 
 
         public Guid CourseId { get; set; }

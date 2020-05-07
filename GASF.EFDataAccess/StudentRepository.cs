@@ -33,12 +33,45 @@ namespace GASF.EFDataAccess
                             .SingleOrDefault();
         }
 
+        public IEnumerable<Grade> GetStudentGrades(Guid id)
+        {
+            return dbContext.Grades.Where(grade => grade.StudentId == id);
+        }
+
+        public IEnumerable<Course> GetStudentCourses(Guid id)
+        {
+            var groupId = GetStudentById(id).GroupId;
+
+            var groupCourseList = dbContext.GroupsCourses.Where(groupCourse => groupCourse.GroupId == groupId);
+
+            List<Course> courseList = new List<Course>();
+            foreach (var groupCourse in groupCourseList)
+            {
+                var course = dbContext.Courses.Where(c => c.Id == groupCourse.CourseId).SingleOrDefault();
+                courseList.Add(course);
+            }
+
+            return courseList.AsEnumerable();
+        }
+
+        //public SchoolFee GetSchoolFee(Guid id)
+        //{
+        //    return dbContext.SchoolFees.Where(fee => fee.IdStudent == id).SingleOrDefault();
+        //}
+        public IEnumerable<SchoolFee> GetSchoolFee(Guid id)
+        {
+            return dbContext.SchoolFees.Where(fee => fee.IdStudent == id);
+        }
+
+        public Student GetByUserId(Guid Id)
+        {
+            return dbContext.Students.Where(student => student.UserId == Id).SingleOrDefault();
+
         public ICollection<Student> GetStudentByGroupId(Guid GropupId)
         {
             return dbContext.Students
                               .Where(student => student.Group.GroupId == GropupId)
-                              .ToList();
-                              
+                              .ToList(); 
         }
     }
 }

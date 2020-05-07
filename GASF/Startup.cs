@@ -41,10 +41,14 @@ namespace GASF
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
+          
+            services.AddScoped<IGradeRepository, GradeRepository>();
+            services.AddScoped<StudentService>();
+           
             services.AddScoped<IExamRepository, ExamRepository>();
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<TeacherService>();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
 
