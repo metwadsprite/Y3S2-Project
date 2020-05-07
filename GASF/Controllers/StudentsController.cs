@@ -13,16 +13,21 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GASF.Controllers
 {
-
+    
     public class StudentsController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly IStudentsService studentsService;
+        private readonly ICertificatesForStudentsService certificateForStudentsService;
+        private readonly ISecretaryService secretaryService;
 
-        public StudentsController(UserManager<IdentityUser> userManager, IStudentsService studentsService)
+        public StudentsController(UserManager<IdentityUser> userManager, IStudentsService studentsService,
+           ICertificatesForStudentsService certificateForStudentsService, ISecretaryService secretaryService)
         {
             this.studentsService = studentsService;
             this.userManager = userManager;
+            this.certificateForStudentsService = certificateForStudentsService;
+            this.secretaryService = secretaryService;
         }
 
         // GET: Students
@@ -99,6 +104,58 @@ namespace GASF.Controllers
         {
             studentsService.DeleteStudent(id);
             return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Students/CreateCertificate
+        [HttpGet]
+        public IActionResult CreateCertificate()
+        {
+            return View();
+        }
+
+        // POST: Students/CreateCertificate
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async Task<IActionResult> CreateCertificate(Guid Id,[Bind("Title,Message,Date")] CertificateForStudent certificateForStudent)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            var userId = userManager.GetUserId(User);
+            var secretaryId = secretaryService.GetSecretaryByUserId(userId);
+            certificateForStudentsService.createCertificateForStudent(certificateForStudent, Id, secretaryId.Id) ;
+            //
+            return Redirect(Url.Action("Index", "Students"));
+        }
+
+        // GET: Students/Details/5
+        [HttpGet]
+        public async Task<IActionResult> CertificateDetails(Guid id)
+        {
+            var certificate = certificateForStudentsService.GetCertificateById(id);
+            var studentC = studentsService.GetStudentById(certificate.IdStudent);
+            var secretary = secretaryService.GetSecretaryById(certificate.IdSecretary);
+
+            CertificateForStudentView certificateForStudentView = new CertificateForStudentView()
+            {
+                certificateForStudent = certificate,
+                student=studentC,
+                secretary=secretary
+                
+              
+            };
+            return View(certificateForStudentView);
+        }
+
+        // GET: Students
+        [HttpGet]
+        public async Task<IActionResult> AllCertificates(Guid id)
+        {
+
+            IEnumerable<CertificateForStudent> certificates = certificateForStudentsService.GetCertificatesForStudent(id);
+            return View(certificates);
         }
     }
 }

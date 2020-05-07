@@ -7,7 +7,7 @@ using System.Text;
 
 namespace GASF.ApplicationLogic.Services
 {
-    public class StudentsService : IStudentsService
+   public class StudentsService : IStudentsService
     {
         private IStudentRepository studentRepository;
         public StudentsService(IStudentRepository studentRepository)
@@ -27,16 +27,16 @@ namespace GASF.ApplicationLogic.Services
                 throw new Exception("Student id is null");
             }
 
-            var student = studentRepository.GetStudentById(id);
+            var student= studentRepository.GetStudentById(id);
 
-            if (student == null)
+            if(student==null)
             {
                 throw new EntityNotFoundException(id);
             }
             return student;
 
         }
-
+       
         public void AddStudent(Student student)
         {
             studentRepository.Add(student);
@@ -49,7 +49,7 @@ namespace GASF.ApplicationLogic.Services
                 throw new EntityNotFoundException(id);
             }
             studentRepository.Update(student);
-
+           
         }
 
         public void DeleteStudent(Guid id)
@@ -64,6 +64,18 @@ namespace GASF.ApplicationLogic.Services
                 throw new EntityNotFoundException(id);
             }
             studentRepository.Delete(student);
+        }
+
+        public IEnumerable<Student> GetStudentsByFirstName(String name)
+        {
+            if (name == null)
+            {
+                return studentRepository.GetAll();
+            }
+
+            var students = studentRepository.GetStudentByFirstName(name);
+
+            return students;
         }
     }
 }

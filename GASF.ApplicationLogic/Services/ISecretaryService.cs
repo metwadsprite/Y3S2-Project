@@ -3,11 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GASF.ApplicationLogic.Abstractions
+namespace GASF.ApplicationLogic.Services
 {
-    public interface ISecretaryRepository : IRepository<Secretary>
+    public interface ISecretaryService
     {
-        Secretary GetSecretaryByUserId(Guid UserId);
+        Secretary GetSecretaryByUserId(string userId);
+
         Secretary GetSecretaryById(Guid Id);
     }
 }
