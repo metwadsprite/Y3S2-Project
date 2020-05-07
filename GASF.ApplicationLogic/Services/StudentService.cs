@@ -1,4 +1,4 @@
-﻿using CourseManager.ApplicationLogic.Exceptions;
+﻿using GASF.ApplicationLogic.Exceptions;
 using GASF.ApplicationLogic.Abstractions;
 using GASF.ApplicationLogic.Data;
 using Microsoft.AspNetCore.Mvc;

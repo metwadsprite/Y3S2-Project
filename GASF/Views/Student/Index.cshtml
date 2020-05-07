@@ -10,23 +10,18 @@
 <br />
 <table class="table table-bordered table-responsive table-hover">
     <tr>
-        <th>📙Course Id </th>
         <th>📙Name </th>
-        <th>📙<br />
-        Description</th>
-        <th>📙<br />
-        TeacherId</th>
-        <th>📙<br />
-        ExamId</th>
+        <th>📙Description</th>
+        <th>📙Teacher Name</th>
+        <th>📙Exam Date</th>
     </tr>
     @foreach (var d in Model.Courses)
     {
         <tr>
-            <td>@d.Id</td>
             <td>@d.Name</td>
             <td>@d.Description</td>
-            <td>@d.TeacherId</td>
-            <td>@d.ExamId</td>
+            <td>@d.Teacher.FirstName @d.Teacher.LastName</td>
+            <td>@d.Exam.Date</td>
         </tr>
 
     }

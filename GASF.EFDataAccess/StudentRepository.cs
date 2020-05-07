@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 namespace GASF.EFDataAccess
 {
@@ -47,7 +48,10 @@ namespace GASF.EFDataAccess
             List<Course> courseList = new List<Course>();
             foreach (var groupCourse in groupCourseList)
             {
-                var course = dbContext.Courses.Where(c => c.Id == groupCourse.CourseId).SingleOrDefault();
+                Course course = dbContext.Courses
+                    .Include(c => c.Teacher)
+                    .Include(c => c.Exam)
+                    .Where(c => c.Id == groupCourse.CourseId).SingleOrDefault();
                 courseList.Add(course);
             }
 
@@ -66,12 +70,13 @@ namespace GASF.EFDataAccess
         public Student GetByUserId(Guid Id)
         {
             return dbContext.Students.Where(student => student.UserId == Id).SingleOrDefault();
-
+        }
         public ICollection<Student> GetStudentByGroupId(Guid GropupId)
         {
             return dbContext.Students
                               .Where(student => student.Group.GroupId == GropupId)
-                              .ToList(); 
+                              .ToList();
         }
+
     }
 }
