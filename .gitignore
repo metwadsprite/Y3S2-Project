@@ -39,3 +39,7 @@ msbuild.wrn
 # Project
 GASF/appsettings.json
 GASF/appsettings.Development.json
+/GASF.EFDataAccess/Migrations/20200507130943_migr1.cs
+/GASF.EFDataAccess/Migrations/20200507130943_migr1.Designer.cs
+/GASF.EFDataAccess/Migrations/20200507140147_migr34.cs
+/GASF.EFDataAccess/Migrations/20200507140147_migr34.Designer.cs

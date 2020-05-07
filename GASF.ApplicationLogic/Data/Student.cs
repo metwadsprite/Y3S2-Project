@@ -24,6 +24,6 @@ namespace GASF.ApplicationLogic.Data
 
         public Group Group { get; set; }
 
-        public Guid GroupId { get; set; }
+        //public Guid GroupId { get; set; }
     }
 }
