@@ -9,11 +9,12 @@ namespace GASF.ApplicationLogic.Abstractions
     {
         Student GetStudentById(Guid Id);
 
-        Student GetStudentByFirstName(string FirstName);
+        ICollection<Student> GetStudentByFirstName(string FirstName);
 
         Student GetStudentByCNP(string CNP);
 
         ICollection<Student> GetStudentByGroupId(Guid GropupId);
+
 
     }
 }

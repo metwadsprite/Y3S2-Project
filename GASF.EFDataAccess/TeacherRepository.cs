@@ -16,8 +16,8 @@ namespace GASF.EFDataAccess
         public Teacher GetTeacherById(Guid Id)
         {
             return dbContext.Teachers
-                            .Where(teacher => teacher.Id == Id)
-                            .SingleOrDefault();
+                             .Where(teacher => teacher.Id == Id)
+                             .SingleOrDefault();
         }
 
         public Teacher GetTeacherByName(string LastName, string FirstName)

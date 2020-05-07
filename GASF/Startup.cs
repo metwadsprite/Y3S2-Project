@@ -13,8 +13,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using GASF.EFDataAccess;
-using GASF.ApplicationLogic.Abstractions;
 using GASF.ApplicationLogic.Services;
+using GASF.ApplicationLogic.Abstractions;
+using GASF.EFDataAccess.Migrations;
 
 namespace GASF
 {
@@ -30,22 +31,46 @@ namespace GASF
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("DefaultConnection")));
             
-            services.AddDbContext<StudentRecordDbContext>(options => 
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<StudentRecordDbContext>(options => 
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("DefaultConnection")));
             
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddScoped<ITeacherRepository, TeacherRepository>();
             services.AddScoped<IExamRepository, ExamRepository>();
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<TeacherService>();
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();\
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddScoped<IStudentsService, StudentsService>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
+
+            services.AddScoped<ITeachersService, TeachersService>();
+            services.AddScoped<ITeacherRepository, TeacherRepository>();
+
+            services.AddScoped<ISecretaryService, SecretaryService>();
+            services.AddScoped<ISecretaryRepository, SecretaryRepository>();
+
+            services.AddScoped<ICertificateForSudentsRepository, CertificateForStudentsRepository>();
+            services.AddScoped<ICertificatesForStudentsService, CertificateForStudentsService> ();
+
+            services.AddScoped<ICertificateForTeachersRepository, CertificateForTeachersRepository>();
+            services.AddScoped<ICertificateForTeachersService, CertificateForTeachersService>();
+            //services.AddTransient(typeof(StudentsService), typeof(StudentsService));
+
+            var connection = @"Data Source=DESKTOP-N2VPAKF;DataBase=gdsf;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<StudentRecordDbContext>
+                (options => options.UseSqlServer(connection));
+
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<StudentRecordDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
