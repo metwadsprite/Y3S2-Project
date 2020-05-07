@@ -31,7 +31,6 @@ namespace GASF.EFDataAccess
         {
             return dbContext.Teachers
                             .Where(teacher => teacher.UserId == userId)
-                            .SingleOrDefault();
         }
     }
 }
