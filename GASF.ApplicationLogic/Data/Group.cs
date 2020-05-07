@@ -8,9 +8,8 @@ namespace GASF.ApplicationLogic.Data
     {
         public Guid GroupId { get; set; }
         public string GroupName { get; set; }
-
+        public string Specialisation { get; set; }
         public ICollection<GroupsCourses> GroupCourses { get; set;}
-
         public ICollection<Student> Students { get; set; }
 
     }

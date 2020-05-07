@@ -8,6 +8,7 @@ namespace GASF.ApplicationLogic.Data
     {
         public Guid Id { get; set; }
         public DateTime Date { get; set; }
+        public Guid CourseId { get; set; }
         public Course Course { get; set; }
         ICollection<Grade> Grades { get; set; }
     }

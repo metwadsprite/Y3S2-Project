@@ -7,7 +7,6 @@ namespace GASF.ApplicationLogic.Abstractions
 {
     public interface IGroupRepository : IRepository<Group>
     {
-        ICollection<Group> GetStudentFromGroup(Guid studentId);
-
+        IEnumerable<Group> GetGroupsByCourseId(Guid id);
     }
 }

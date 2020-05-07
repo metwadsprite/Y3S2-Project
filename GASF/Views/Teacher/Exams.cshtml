@@ -1,0 +1,25 @@
+﻿@model GASF.Models.Exams.TeacherExamViewModel;
+@{
+    ViewData["Title"] = "";
+}
+
+<h1>Exams</h1>
+
+<h1>Teacher's Exams</h1>
+<table style="width:100%">
+
+    <tr>
+        <th>Name</th>
+        <th>Date</th>
+
+    </tr>
+
+    @foreach (var exam in Model.Exams)
+    {
+        <tr>
+            <td>@exam.Course.Name</td>
+            <td>@exam.Date</td>
+        </tr>
+    }
+
+</table>

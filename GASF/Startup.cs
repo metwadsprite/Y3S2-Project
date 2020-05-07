@@ -39,8 +39,13 @@ namespace GASF
             //    options.UseSqlServer(
             //        Configuration.GetConnectionString("DefaultConnection")));
             
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddScoped<IExamRepository, ExamRepository>();
+            services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<TeacherService>();
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();\
             services.AddControllersWithViews();
             services.AddRazorPages();
 
