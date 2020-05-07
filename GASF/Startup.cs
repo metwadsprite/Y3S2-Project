@@ -39,8 +39,6 @@ namespace GASF
             //    options.UseSqlServer(
             //        Configuration.GetConnectionString("DefaultConnection")));
             
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddScoped<IExamRepository, ExamRepository>();
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<TeacherService>();
@@ -65,7 +63,7 @@ namespace GASF
             services.AddScoped<ICertificateForTeachersService, CertificateForTeachersService>();
             //services.AddTransient(typeof(StudentsService), typeof(StudentsService));
 
-            var connection = @"Data Source=DESKTOP-N2VPAKF;DataBase=gdsf;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=aspnet-GASF-C6AB9B42-F869-4F54-BA59-D44D2514F390;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<StudentRecordDbContext>
                 (options => options.UseSqlServer(connection));
 
