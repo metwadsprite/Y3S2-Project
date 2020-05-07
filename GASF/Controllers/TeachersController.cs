@@ -9,11 +9,14 @@ using GASF.ApplicationLogic.Data;
 using GASF.EFDataAccess;
 using Microsoft.AspNetCore.Identity;
 using GASF.ApplicationLogic.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GASF.Controllers
 {
+    [Authorize]
     public class TeachersController : Controller
     {
+        
 
         private readonly UserManager<IdentityUser> userManager;
         private readonly ITeachersService teachersService;
