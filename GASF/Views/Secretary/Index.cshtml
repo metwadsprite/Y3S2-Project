@@ -6,8 +6,12 @@
 
 <h1>Home Secretary</h1>
 
-<a asp-action="Index" asp-controller="Students">Students</a>
-<p></p>
-<a asp-action="Index" asp-controller="Teachers">Teachers</a>
+<a href='@Url.Action("Index", "Students")' class="btn btn-primary">Students</a>
+
+<a href='@Url.Action("Index", "Teachers")' class="btn btn-primary">Students</a>
+
+@*<a asp-action="Index" asp-controller="Students">Students</a>
+    <p></p>
+    <a asp-action="Index" asp-controller="Teachers">Teachers</a>*@
 
 
