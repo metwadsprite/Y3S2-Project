@@ -1,0 +1,26 @@
+﻿@model GASF.Models.Courses.TeacherCoursesViewModel;
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Teacher's Courses</h1>
+<table style="width:100%">
+
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+
+    </tr>
+
+    @foreach (var course in Model.Courses)
+    {
+        <tr>
+            <td>@course.Name</td>
+            <td>@course.Description</td>
+        </tr>
+    }
+
+</table>
+<a href='@Url.Action("Create", "Teacher")' class="btn btn-primary">Add a new course</a>
+<a href='@Url.Action("Exams", "Teacher")' class="btn btn-primary">View your exams</a>
+<a href='@Url.Action("ExamCreate", "Teacher")' class="btn btn-primary">Add an exam</a>

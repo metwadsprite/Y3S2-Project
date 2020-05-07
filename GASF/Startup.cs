@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using GASF.EFDataAccess;
 using GASF.ApplicationLogic.Services;
 using GASF.ApplicationLogic.Abstractions;
+using GASF.EFDataAccess.Migrations;
 
 namespace GASF
 {
@@ -33,22 +34,38 @@ namespace GASF
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            
-            services.AddDbContext<StudentRecordDbContext>(options => 
+
+            services.AddDbContext<StudentRecordDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
-            services.AddScoped<ITeacherRepository, TeacherRepository>();
-            services.AddScoped<ICourseRepository, CourseRepository>();
-            services.AddScoped<IStudentRepository, StudentRepository>();
+          
             services.AddScoped<IGradeRepository, GradeRepository>();
             services.AddScoped<StudentService>();
            
+            services.AddScoped<IExamRepository, ExamRepository>();
+            services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<TeacherService>();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddScoped<IStudentsService, StudentsService>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
+
+            services.AddScoped<ITeachersService, TeachersService>();
+            services.AddScoped<ITeacherRepository, TeacherRepository>();
+
+            services.AddScoped<ISecretaryService, SecretaryService>();
+            services.AddScoped<ISecretaryRepository, SecretaryRepository>();
+
+            services.AddScoped<ICertificateForSudentsRepository, CertificateForStudentsRepository>();
+            services.AddScoped<ICertificatesForStudentsService, CertificateForStudentsService> ();
+
+            services.AddScoped<ICertificateForTeachersRepository, CertificateForTeachersRepository>();
+            services.AddScoped<ICertificateForTeachersService, CertificateForTeachersService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

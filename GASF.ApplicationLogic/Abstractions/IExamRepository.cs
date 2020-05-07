@@ -8,7 +8,7 @@ namespace GASF.ApplicationLogic.Abstractions
     public interface IExamRepository : IRepository<Exam>
     {
         ICollection<Exam> GetGroupExams(Guid groupId);
-        ICollection<Exam> GetTeacherExams(Guid teacherId);
+        IEnumerable<Exam> GetTeacherExams(Guid teacherId);
         ICollection<Exam> GetExamByDate(DateTime date);
     }
 }

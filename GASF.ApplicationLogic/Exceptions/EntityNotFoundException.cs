@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CourseManager.ApplicationLogic.Exceptions
+namespace GASF.ApplicationLogic.Exceptions
 {
     public class EntityNotFoundException : Exception
     {

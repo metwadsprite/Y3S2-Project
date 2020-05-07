@@ -13,11 +13,25 @@ namespace GASF.EFDataAccess
         {
 
         }
-        Teacher GetTeacherByName(string LastName)
+        public Teacher GetTeacherById(Guid Id)
         {
             return dbContext.Teachers
-                            .Where(teacher => teacher.LastName == LastName)
+                             .Where(teacher => teacher.Id == Id)
+                             .SingleOrDefault();
+        }
+
+        public Teacher GetTeacherByName(string LastName, string FirstName)
+        {
+            return dbContext.Teachers
+                            .Where(teacher => teacher.LastName == LastName && teacher.LastName == FirstName )
                             .SingleOrDefault();
+        }
+
+        public Teacher GetTeacherByUserId(Guid userId)
+        {
+            return dbContext.Teachers
+                            .Where(teacher => teacher.UserId == userId)
+                            .FirstOrDefault();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace GASF.ApplicationLogic.Abstractions
 {
     public interface ISecretaryRepository : IRepository<Secretary>
     {
-        ICollection<Secretary> GetSecretaryById(Guid Id);
-
+        Secretary GetSecretaryByUserId(Guid UserId);
+        Secretary GetSecretaryById(Guid Id);
     }
 }

@@ -1,0 +1,27 @@
+﻿@model GASF.ApplicationLogic.Data.Exam;
+@{
+    ViewData["Title"] = "";
+}
+
+<h1>ExamCreate</h1>
+
+<form asp-action="ExamCreate" method="post">
+
+    <div class="form-group">
+        <label asp-for="Course.Name" class="control-label"></label>
+        <input asp-for="Course.Name" class="form-control" />
+        <span asp-validation-for="Course.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Date" class="control-label"></label>
+        <input asp-for="Date" class="form-control" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+        </div>
+    <br />
+    <div class="row">
+        <div class="col-5"></div>
+        <div class="col-4">
+            <button type="submit" class="btn btn-primary">Save Exam</button>
+        </div>
+    </div>
+</form>

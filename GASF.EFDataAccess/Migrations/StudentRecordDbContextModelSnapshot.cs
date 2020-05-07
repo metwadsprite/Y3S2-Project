@@ -43,6 +43,9 @@ namespace GASF.EFDataAccess.Migrations
                     b.Property<Guid?>("StudentId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("SecretaryId");
@@ -76,6 +79,9 @@ namespace GASF.EFDataAccess.Migrations
                     b.Property<Guid?>("TeacherId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("SecretaryId");
@@ -94,19 +100,13 @@ namespace GASF.EFDataAccess.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ExamId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("TeacherId")
+                    b.Property<Guid?>("TeacherId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ExamId")
-                        .IsUnique();
 
                     b.HasIndex("TeacherId");
 
@@ -119,10 +119,16 @@ namespace GASF.EFDataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CourseId")
+                        .IsUnique();
 
                     b.ToTable("Exams");
                 });
@@ -163,6 +169,9 @@ namespace GASF.EFDataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("GroupName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Specialisation")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("GroupId");
@@ -231,6 +240,9 @@ namespace GASF.EFDataAccess.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.ToTable("Secretaries");
@@ -297,6 +309,9 @@ namespace GASF.EFDataAccess.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.ToTable("Teachers");
@@ -326,15 +341,16 @@ namespace GASF.EFDataAccess.Migrations
 
             modelBuilder.Entity("GASF.ApplicationLogic.Data.Course", b =>
                 {
-                    b.HasOne("GASF.ApplicationLogic.Data.Exam", "Exam")
-                        .WithOne("Course")
-                        .HasForeignKey("GASF.ApplicationLogic.Data.Course", "ExamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("GASF.ApplicationLogic.Data.Teacher", "Teacher")
                         .WithMany("Courses")
-                        .HasForeignKey("TeacherId")
+                        .HasForeignKey("TeacherId");
+                });
+
+            modelBuilder.Entity("GASF.ApplicationLogic.Data.Exam", b =>
+                {
+                    b.HasOne("GASF.ApplicationLogic.Data.Course", "Course")
+                        .WithOne("Exam")
+                        .HasForeignKey("GASF.ApplicationLogic.Data.Exam", "CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
