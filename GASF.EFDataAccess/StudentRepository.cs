@@ -17,6 +17,7 @@ namespace GASF.EFDataAccess
         public Student GetStudentById(Guid Id)
         {
             return dbContext.Students
+                            .Include(s => s.Group)
                             .Where(student => student.Id == Id)
                             .SingleOrDefault();
         }
@@ -41,7 +42,7 @@ namespace GASF.EFDataAccess
 
         public IEnumerable<Course> GetStudentCourses(Guid id)
         {
-            var groupId = GetStudentById(id).GroupId;
+            var groupId = GetStudentById(id).Group.GroupId;
 
             var groupCourseList = dbContext.GroupsCourses.Where(groupCourse => groupCourse.GroupId == groupId);
 
