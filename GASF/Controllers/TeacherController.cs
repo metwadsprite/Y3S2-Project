@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Routing;
 using GASF.Models.Exams;
+using GASF.Models.Students;
 
 namespace GASF.Controllers
 {
@@ -21,10 +22,12 @@ namespace GASF.Controllers
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly TeacherService teacherService;
-        public TeacherController(UserManager<IdentityUser> userManager, TeacherService teacherService)
+        private readonly CourseService courseService;
+        public TeacherController(UserManager<IdentityUser> userManager, TeacherService teacherService, CourseService courseService)
         {
             this.userManager = userManager;
             this.teacherService = teacherService;
+            this.courseService = courseService;
         }
 
         [HttpGet]
@@ -51,6 +54,22 @@ namespace GASF.Controllers
                 Teacher teacher = teacherService.GetTeacherByUserId(userId);
                 IEnumerable<Exam> exams = teacherService.GetExams(userId);
                 return View(new TeacherExamViewModel { Teacher = teacher, Exams = exams });
+            }
+            catch (Exception)
+            {
+                return BadRequest("Invalid request received ");
+            }
+        }
+        [HttpGet]
+        public IActionResult Students(Guid id)
+        {
+            try
+            {
+                var userId = userManager.GetUserId(User);
+                Teacher teacher = teacherService.GetTeacherByUserId(userId);
+                Course course = courseService.GetById(id);
+                IEnumerable<Student> students = teacherService.GetCourseStudents(id);
+                return View(new TeacherCourseEnrolledStudents { Teacher = teacher, Course = course, Students = students });
             }
             catch (Exception)
             {

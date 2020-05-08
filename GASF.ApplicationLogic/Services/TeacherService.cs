@@ -42,6 +42,15 @@ namespace GASF.ApplicationLogic.Services
                             .Where(course => course.Teacher != null && course.Teacher.UserId == userIdGuid)
                             .AsEnumerable();
         }
+        public IEnumerable<Student> GetCourseStudents(Guid courseId)
+        {
+            //Guid courseIdGuid = Guid.Empty;
+            //if (!Guid.TryParse(courseId, out courseIdGuid))
+            //{
+            //    throw new Exception("Invalid Guid Format");
+            //}
+            return teacherRepository.GetTeacherCourseStudents(courseId);
+        }
         public IEnumerable<Exam> GetExams(string userId)
         {
             Guid userIdGuid = Guid.Empty;

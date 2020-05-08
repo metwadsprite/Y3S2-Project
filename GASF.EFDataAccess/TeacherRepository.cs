@@ -1,5 +1,6 @@
 ﻿using GASF.ApplicationLogic.Abstractions;
 using GASF.ApplicationLogic.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,24 @@ namespace GASF.EFDataAccess
             return dbContext.Teachers
                             .Where(teacher => teacher.UserId == userId)
                             .FirstOrDefault();
+        }
+
+        public IEnumerable<Student> GetTeacherCourseStudents(Guid courseId)
+        {
+            var groups = dbContext.Groups.Include(g => g.GroupCourses);
+
+            List<Student> students = new List<Student>();
+            foreach(var group in groups)
+            {
+                if (group.GroupCourses.Any(g => g.CourseId == courseId))
+                {
+                    Student student = dbContext.Students
+                        .Where(s => s.Group.GroupId == group.GroupId)
+                        .SingleOrDefault();
+                    students.Add(student);
+                }
+            }
+            return students;
         }
     }
 }

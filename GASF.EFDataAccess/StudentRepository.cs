@@ -59,10 +59,6 @@ namespace GASF.EFDataAccess
             return courseList.AsEnumerable();
         }
 
-        //public SchoolFee GetSchoolFee(Guid id)
-        //{
-        //    return dbContext.SchoolFees.Where(fee => fee.IdStudent == id).SingleOrDefault();
-        //}
         public IEnumerable<SchoolFee> GetSchoolFee(Guid id)
         {
             return dbContext.SchoolFees.Where(fee => fee.IdStudent == id);
@@ -78,6 +74,5 @@ namespace GASF.EFDataAccess
                               .Where(student => student.Group.GroupId == GropupId)
                               .ToList();
         }
-
     }
 }

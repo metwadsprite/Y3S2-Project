@@ -15,15 +15,19 @@ namespace GASF.ApplicationLogic.Services
             this.courseRepository = courseRepository;
         }
 
-        public Course GetById(string courseId)
+        public Course GetById(Guid courseId)
         {
-            Guid courseIdGuid = Guid.Empty;
-            if (!Guid.TryParse(courseId, out courseIdGuid))
-            {
-                throw new Exception("Invalid Guid Format");
-            }
-            return courseRepository.GetCourseById(courseIdGuid);
+            //Guid courseIdGuid = Guid.Empty;
+            //if (!Guid.TryParse(courseId, out courseIdGuid))
+            //{
+            //    throw new Exception("Invalid Guid Format");
+            //}
+            return courseRepository.GetCourseById(courseId);
         }
         
+        public Course GetByName(string courseName)
+        {
+            return courseRepository.GetCourseByName(courseName);
+        }
     }
 }

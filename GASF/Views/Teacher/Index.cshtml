@@ -9,6 +9,7 @@
     <tr>
         <th>Name</th>
         <th>Description</th>
+        <th>Enrolled students</th>
 
     </tr>
 
@@ -17,6 +18,11 @@
         <tr>
             <td>@course.Name</td>
             <td>@course.Description</td>
+            <td>
+               @* @Html.ActionLink("Select", "Students", "Teacher", new { id = course.Id.ToString })*@
+                @*@Html.Hidden(course.Id)*@
+                <a asp-action="Students" asp-route-id="@course.Id">Select</a>
+            </td>
         </tr>
     }
 

@@ -10,5 +10,6 @@ namespace GASF.ApplicationLogic.Abstractions
         Teacher GetTeacherByName(string LastName, string FirstName);
         Teacher GetTeacherById(Guid Id);
         Teacher GetTeacherByUserId(Guid userIdGuid);
+        IEnumerable<Student> GetTeacherCourseStudents(Guid userId);
     }
 }

@@ -1,0 +1,24 @@
+﻿@model GASF.Models.Students.TeacherCourseEnrolledStudents;
+@{
+    ViewData["Title"] = "";
+}
+
+<table style="width:100%">
+
+    <tr>
+        <th>Name</th>
+        <th>Group</th>
+        <th>Email</th>
+        <th>Add Grade</th>
+    </tr>
+
+    @foreach (var s in Model.Students)
+    {
+        <tr>
+            <td>@s.FirstName @s.LastName</td>
+            <td>@s.Group.GroupName</td>
+            <td>@s.Email</td>
+        </tr>
+    }
+
+</table>

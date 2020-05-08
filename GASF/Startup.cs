@@ -46,7 +46,10 @@ namespace GASF
             services.AddScoped<StudentService>();
            
             services.AddScoped<IExamRepository, ExamRepository>();
+
             services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<CourseService>();
+
             services.AddScoped<TeacherService>();
 
             services.AddControllersWithViews();
