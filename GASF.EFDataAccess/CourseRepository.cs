@@ -18,6 +18,7 @@ namespace GASF.EFDataAccess
         public Course GetCourseById(Guid id)
         {
             return dbContext.Courses
+                            .Include(c => c.Exam)
                             .Where(course => course.Id == id)
                             .SingleOrDefault();
         }

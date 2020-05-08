@@ -61,7 +61,7 @@ namespace GASF.EFDataAccess
 
         public IEnumerable<SchoolFee> GetSchoolFee(Guid id)
         {
-            return dbContext.SchoolFees.Where(fee => fee.IdStudent == id);
+            return dbContext.SchoolFees.Include(sf => sf.Student).Where(fee => fee.Student.Id == id);
         }
 
         public Student GetByUserId(Guid Id)

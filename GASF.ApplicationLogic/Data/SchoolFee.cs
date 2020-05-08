@@ -8,8 +8,6 @@ namespace GASF.ApplicationLogic.Data
     {
         public Guid Id { get; set; }
 
-        public Guid IdStudent { get; set; }
-
         public Student Student { get; set; }
 
         public DateTime DueDate { get; set; }

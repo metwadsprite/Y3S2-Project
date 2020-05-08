@@ -65,6 +65,16 @@ namespace GASF.ApplicationLogic.Services
             return studentRepository?.GetStudentGrades(userIdGuid);
         }
 
+        public Grade GetStudentExamGrade(string userId, string examId)
+        {
+            IEnumerable<Grade> studentGrades = this.GetStudentGrade(userId);
+            Guid examIdGuid = Guid.Empty;
+            if (!Guid.TryParse(examId, out examIdGuid))
+            {
+                throw new Exception("Invalid Guid Format");
+            }
+            return studentGrades.Where(g => g.ExamId == examIdGuid).FirstOrDefault();
+        }
         public IEnumerable<SchoolFee> GetSchoolFee(string id)
         {
             Guid userIdGuid = Guid.Empty;

@@ -11,5 +11,6 @@ namespace GASF.Models.Students
         public Teacher Teacher { get; set; }
         public Course Course { get; set; }
         public IEnumerable<Student> Students { get; set; }
+        public IEnumerable<Grade> Grades { get; set; }
     }
 }

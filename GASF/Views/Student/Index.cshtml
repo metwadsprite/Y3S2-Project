@@ -36,18 +36,14 @@
 <br />
 <table class="table table-bordered table-responsive table-hover">
     <tr>
-        <th>❗❗  SchoolFee Id </th>
-        <th>❗❗  Student </th>
         <th>❗❗ Due Date</th>
         <th>❗❗  Value</th>
     </tr>
     @foreach (var d in Model.SchoolFee)
     {
         <tr>
-            <td>@d.Id</td>
-            <td>@d.IdStudent</td>
             <td>@d.DueDate</td>
-            <td>@d.Value</td>
+            <td>@d.Value RON</td>
         </tr>
 
     }
@@ -61,19 +57,14 @@
 <br />
 <table class="table table-bordered table-responsive table-hover">
     <tr>
-        <th>✔️ Grade Id </th>
+        <th>✔️ Exam Name</th>
         <th>✔️ Score Grade </th>
-        <th>✔️ Exam Id</th>
-        <th>✔️ Student Id</th>
-     </tr>
+    </tr>
     @foreach (var d in Model.Grades)
     {
         <tr>
-            <td>@d.Id</td>
+            <td>@d.Exam.Course.Name</td>
             <td>@d.Score</td>
-            <td>@d.ExamId</td>
-            <td>@d.StudentId
-            </td>
         </tr>
 
     }

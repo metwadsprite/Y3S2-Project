@@ -23,11 +23,14 @@ namespace GASF.Controllers
         private readonly UserManager<IdentityUser> userManager;
         private readonly TeacherService teacherService;
         private readonly CourseService courseService;
-        public TeacherController(UserManager<IdentityUser> userManager, TeacherService teacherService, CourseService courseService)
+        private readonly StudentService studentService;
+
+        public TeacherController(UserManager<IdentityUser> userManager, TeacherService teacherService, CourseService courseService, StudentService studentService)
         {
             this.userManager = userManager;
             this.teacherService = teacherService;
             this.courseService = courseService;
+            this.studentService = studentService;
         }
 
         [HttpGet]
@@ -69,7 +72,12 @@ namespace GASF.Controllers
                 Teacher teacher = teacherService.GetTeacherByUserId(userId);
                 Course course = courseService.GetById(id);
                 IEnumerable<Student> students = teacherService.GetCourseStudents(id);
-                return View(new TeacherCourseEnrolledStudents { Teacher = teacher, Course = course, Students = students });
+                List<Grade> grades = new List<Grade>();
+                foreach(var s in students)
+                {
+                    grades.Add(studentService.GetStudentExamGrade(s.UserId.ToString(), course.Exam.Id.ToString()));
+                }
+                return View(new TeacherCourseEnrolledStudents { Teacher = teacher, Course = course, Students = students, Grades = grades });
             }
             catch (Exception)
             {
