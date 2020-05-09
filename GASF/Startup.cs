@@ -16,6 +16,8 @@ using GASF.EFDataAccess;
 using GASF.ApplicationLogic.Services;
 using GASF.ApplicationLogic.Abstractions;
 using GASF.EFDataAccess.Migrations;
+using GASF.Areas.Identity.Auth;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GASF
 {
@@ -39,7 +41,7 @@ namespace GASF
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
           
             services.AddScoped<IGradeRepository, GradeRepository>();
@@ -69,6 +71,22 @@ namespace GASF
 
             services.AddScoped<ICertificateForTeachersRepository, CertificateForTeachersRepository>();
             services.AddScoped<ICertificateForTeachersService, CertificateForTeachersService>();
+
+            services.AddScoped<UserService>();
+
+            services.AddTransient<IAuthorizationHandler, UserHandler>();
+            services.AddAuthorization(options => 
+            {
+                options.AddPolicy("Secretary",
+                    policy => policy.Requirements.Add(new UserRequirement("Secretary"))
+                );
+                options.AddPolicy("Student",
+                    policy => policy.Requirements.Add(new UserRequirement("Student"))
+                );
+                options.AddPolicy("Teacher",
+                    policy => policy.Requirements.Add(new UserRequirement("Teacher"))
+                );
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

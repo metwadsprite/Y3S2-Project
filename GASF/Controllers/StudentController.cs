@@ -12,7 +12,7 @@ using CourseManager.Models.Students;
 
 namespace GASF.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "Student")]
     public class StudentController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
@@ -37,7 +37,7 @@ namespace GASF.Controllers
 
                 return View(new StudentCoursesViewModel { Student = student, Courses = studentCourses, Grades = studentGrades, SchoolFee = schoolFee });
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return BadRequest("Invalid request received ");
             }
@@ -45,7 +45,7 @@ namespace GASF.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Details(long? id)
+        public IActionResult Details(long? id)
         {
             if (id == 0)
             {

@@ -17,7 +17,7 @@ using GASF.Models.Students;
 
 namespace GASF.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "Teacher")]
     public class TeacherController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;

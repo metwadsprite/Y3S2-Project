@@ -74,5 +74,10 @@ namespace GASF.EFDataAccess
                               .Where(student => student.Group.GroupId == GropupId)
                               .ToList();
         }
+
+        public Student GetStudentByUserId(Guid userId)
+        {
+            return dbContext.Students.Where(s => s.UserId == userId).Single();
+        }
     }
 }

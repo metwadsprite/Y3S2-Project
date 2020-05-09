@@ -18,7 +18,7 @@ namespace GASF.EFDataAccess.Migrations
         {
                 return dbContext.Secretaries
                                 .Where(secretary => secretary.UserId == UserId)
-                                .SingleOrDefault();
+                                .Single();
             
         }
 
