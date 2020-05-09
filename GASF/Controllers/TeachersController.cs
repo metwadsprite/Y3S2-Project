@@ -36,7 +36,7 @@ namespace GASF.Controllers
 
         // GET: Teachers
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             IEnumerable<Teacher> teachers = teachersService.GetAllTeachers();
             return View(teachers);
@@ -45,7 +45,7 @@ namespace GASF.Controllers
 
         // GET: Teachers/Details/5
         [HttpGet]
-        public async Task<IActionResult> Details(Guid id)
+        public IActionResult Details(Guid id)
         {
             var teacher = teachersService.GetTeacherById(id);
 
@@ -63,7 +63,7 @@ namespace GASF.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Email,Phone,BirthDate")] Teacher teacher)
+        public IActionResult Create([Bind("Id,FirstName,LastName,Email,Phone,BirthDate")] Teacher teacher)
         {
             if (!ModelState.IsValid)
             {
@@ -76,7 +76,7 @@ namespace GASF.Controllers
 
         // GET: Teachers/Edit/5
         [HttpGet]
-        public async Task<IActionResult> Edit(Guid id)
+        public IActionResult Edit(Guid id)
         {
             var teacher = teachersService.GetTeacherById(id);
             return View(teacher);
@@ -86,7 +86,7 @@ namespace GASF.Controllers
         // POST: Teachers/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,FirstName,LastName,Email,Phone,BirthDate")] Teacher teacher)
+        public IActionResult Edit(Guid id, [Bind("Id,FirstName,LastName,Email,Phone,BirthDate")] Teacher teacher)
         {
 
             if (!ModelState.IsValid)
@@ -98,7 +98,7 @@ namespace GASF.Controllers
         }
 
         // GET: Teachers/Delete/5
-        public async Task<IActionResult> Delete(Guid id)
+        public IActionResult Delete(Guid id)
         {
             var teacher = teachersService.GetTeacherById(id);
             return View(teacher);
@@ -107,7 +107,7 @@ namespace GASF.Controllers
         // POST: Teachers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public IActionResult DeleteConfirmed(Guid id)
         {
             teachersService.DeleteTeacher(id);
             return RedirectToAction(nameof(Index));
@@ -117,7 +117,7 @@ namespace GASF.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<IActionResult> CreateCertificate(Guid Id, [Bind("Title,Message,Date")] CertificateForTeacher certificateForTeacher)
+        public IActionResult CreateCertificate(Guid Id, [Bind("Title,Message,Date")] CertificateForTeacher certificateForTeacher)
         {
             if (!ModelState.IsValid)
             {
@@ -126,7 +126,7 @@ namespace GASF.Controllers
             var userId = userManager.GetUserId(User);
             var secretaryId = secretaryService.GetSecretaryByUserId(userId);
 
-            certificateForTeachersService.createCertificateForTeacher(certificateForTeacher, Id,secretaryId.Id);
+            certificateForTeachersService.createCertificateForTeacher(certificateForTeacher, Id, secretaryId.Id);
             //
             return Redirect(Url.Action("Index", "Teachers"));
         }
@@ -139,7 +139,7 @@ namespace GASF.Controllers
         }
         // GET: Teachers/Certification//Details/5
         [HttpGet]
-        public async Task<IActionResult> CertificateDetails(Guid id)
+        public IActionResult CertificateDetails(Guid id)
         {
             var certificate = certificateForTeachersService.GetCertificateById(id);
             var teacher = teachersService.GetTeacherById(certificate.IdTeacher);
@@ -155,7 +155,7 @@ namespace GASF.Controllers
 
         // GET: Certifications
         [HttpGet]
-        public async Task<IActionResult> AllCertificates(Guid id)
+        public IActionResult AllCertificates(Guid id)
         {
 
             IEnumerable<CertificateForTeacher> certificates = certificateForTeachersService.GetCertificatesForTeacher(id);
