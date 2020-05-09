@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GASF.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "Secretary")]
     public class TeachersController : Controller
     {
         

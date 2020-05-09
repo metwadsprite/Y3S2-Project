@@ -12,7 +12,7 @@ using CourseManager.Models.Students;
 
 namespace GASF.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "Student")]
     public class StudentController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;

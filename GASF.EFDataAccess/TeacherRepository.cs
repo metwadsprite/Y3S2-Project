@@ -32,7 +32,7 @@ namespace GASF.EFDataAccess
         {
             return dbContext.Teachers
                             .Where(teacher => teacher.UserId == userId)
-                            .FirstOrDefault();
+                            .Single();
         }
 
         public IEnumerable<Student> GetTeacherCourseStudents(Guid courseId)
