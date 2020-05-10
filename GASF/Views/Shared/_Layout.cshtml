@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Identity;
 @inject UserService UserService;
 @inject UserManager<IdentityUser> UserManager;
+@inject SignInManager<IdentityUser> SignInManager;
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,23 +28,33 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @if (UserService.IsUserStudent(Guid.Parse(UserManager.GetUserId(User))))
+                        @if (SignInManager.IsSignedIn(User))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Index">Student</a>
-                            </li>
-                        }
-                        @if (UserService.IsUserTeacher(Guid.Parse(UserManager.GetUserId(User))))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Teacher" asp-action="Index">Teacher</a>
-                            </li>
-                        }
-                        @if (UserService.IsUserSecretary(Guid.Parse(UserManager.GetUserId(User))))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Secretary" asp-action="Index">Secretary</a>
-                            </li>
+                            @if (UserService.IsUserStudent(Guid.Parse(UserManager.GetUserId(User))))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Index">Student</a>
+                                </li>
+                            }
+                            @if (UserService.IsUserTeacher(Guid.Parse(UserManager.GetUserId(User))))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Teacher" asp-action="Index">Teacher</a>
+                                </li>
+                            }
+                            @if (UserService.IsUserSecretary(Guid.Parse(UserManager.GetUserId(User))))
+                            {
+                                <li class="nav-item">
+                                    <div class="dropdown show">
+                                        <a class="nav-link text-dark dropdown-toggle" href="#" role="button" id="secretaryMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Secretary</a>
+
+                                        <div class="dropdown-menu" aria-labelledby="secretaryMenu">
+                                            <a class="dropdown-item" asp-controller="Students" asp-action="Index">Students</a>
+                                            <a class="dropdown-item" asp-controller="Teachers" asp-action="Index">Teachers</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
                         }
                     </ul>
                 </div>

@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using GASF.ApplicationLogic.Data;
-using GASF.EFDataAccess;
 using Microsoft.AspNetCore.Identity;
 using GASF.ApplicationLogic.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -22,15 +18,19 @@ namespace GASF.Controllers
         private readonly ITeachersService teachersService;
         private readonly ICertificateForTeachersService certificateForTeachersService;
         private readonly ISecretaryService secretaryService;
+        private readonly UserService userService;
 
-
-        public TeachersController(UserManager<IdentityUser> userManager, ITeachersService teachersService,
-             ICertificateForTeachersService certificateForTeachersService,ISecretaryService secretaryService)
-        {
+        public TeachersController(UserManager<IdentityUser> userManager,
+            ITeachersService teachersService,
+            ICertificateForTeachersService certificateForTeachersService,
+            ISecretaryService secretaryService,
+            UserService userService
+        ) {
             this.userManager = userManager;
             this.teachersService = teachersService;
             this.certificateForTeachersService = certificateForTeachersService;
             this.secretaryService = secretaryService;
+            this.userService = userService;
         }
 
 
@@ -56,19 +56,28 @@ namespace GASF.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            return View(new Teacher());
         }
 
         // POST: Teachers/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [HttpPost]
-        public IActionResult Create([Bind("Id,FirstName,LastName,Email,Phone,BirthDate")] Teacher teacher)
+        public IActionResult Create([FromForm]Teacher teacher)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
+            var teacherUser = userManager.Users
+                .AsEnumerable()
+                .Where(
+                    user => Guid.Parse(user.Id) == teacher.UserId
+                )
+                .Single();
+
+            teacher.Email = teacherUser.Email;
+            teacher.Phone = teacherUser.PhoneNumber;
+
             teachersService.AddTeacher(teacher);
             return Redirect(Url.Action("Index", "Teachers"));
         }
