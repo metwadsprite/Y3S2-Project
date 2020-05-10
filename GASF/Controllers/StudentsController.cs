@@ -20,14 +20,19 @@ namespace GASF.Controllers
         private readonly IStudentsService studentsService;
         private readonly ICertificatesForStudentsService certificateForStudentsService;
         private readonly ISecretaryService secretaryService;
+        private readonly GroupService groupService;
 
-        public StudentsController(UserManager<IdentityUser> userManager, IStudentsService studentsService,
-           ICertificatesForStudentsService certificateForStudentsService, ISecretaryService secretaryService)
-        {
+        public StudentsController(UserManager<IdentityUser> userManager,
+            IStudentsService studentsService,
+            ICertificatesForStudentsService certificateForStudentsService,
+            ISecretaryService secretaryService,
+            GroupService groupService
+        ) {
             this.studentsService = studentsService;
             this.userManager = userManager;
             this.certificateForStudentsService = certificateForStudentsService;
             this.secretaryService = secretaryService;
+            this.groupService = groupService;
         }
 
         // GET: Students
@@ -57,13 +62,20 @@ namespace GASF.Controllers
         // POST: Students/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [HttpPost]
-        public IActionResult Create([Bind("Id,FirstName,LastName,Email,Adress,Phone,BirthDate,CNP")] Student student)
+        public IActionResult Create([FromForm] Student student)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
+            var atachedUser = userManager.Users
+                .AsEnumerable()
+                .Where(user => Guid.Parse(user.Id) == student.UserId)
+                .Single();
+            
+            student.Email = atachedUser.Email;
+            student.Phone = atachedUser.PhoneNumber;
+
             studentsService.AddStudent(student);
             return Redirect(Url.Action("Index", "Students"));
         }
@@ -79,15 +91,15 @@ namespace GASF.Controllers
         // POST: Students/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Guid id, [Bind("Id,FirstName,LastName,Email,Adress,Phone,BirthDate,CNP")] Student student)
+        public IActionResult Edit([FromForm] Student student)
         {
 
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            studentsService.EditStudent(id, student);
-            return View(student);
+            studentsService.EditStudent(student);
+            return RedirectToAction("Index");
         }
 
         // GET: Students/Delete/5

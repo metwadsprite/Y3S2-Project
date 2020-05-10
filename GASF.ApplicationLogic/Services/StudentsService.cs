@@ -42,14 +42,9 @@ namespace GASF.ApplicationLogic.Services
             studentRepository.Add(student);
         }
 
-        public void EditStudent(Guid id, Student student)
+        public void EditStudent(Student student)
         {
-            if (id != student.Id)
-            {
-                throw new EntityNotFoundException(id);
-            }
             studentRepository.Update(student);
-           
         }
 
         public void DeleteStudent(Guid id)

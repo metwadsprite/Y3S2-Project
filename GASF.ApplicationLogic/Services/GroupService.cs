@@ -47,5 +47,11 @@ namespace GASF.ApplicationLogic.Services
         {
             groupRepository.Update(group);
         }
+
+        public void AddStudentToGroup(Student student, Group group)
+        {
+            group.Students.Add(student);
+            groupRepository.Update(group);
+        }
     }
 }
