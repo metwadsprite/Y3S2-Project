@@ -1,0 +1,43 @@
+@using GASF.Models.Groups;
+@model GroupIndexViewModel;
+
+@{
+    ViewData["Title"] = "Student groups";
+}
+
+
+<div>
+    <h4>Student groups</h4>
+<a class="btn btn-primary" asp-action="Create">Create new student group</a>
+</div>
+<hr>
+<div id="group-accordion">
+    <div class="card">
+        @foreach (var group in @Model.groups)
+        {
+            <div class="card-header" id="head-@group.GroupId">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse-@group.GroupId" aria-expanded="true" aria-controls="collapse-@group.GroupId">
+                        @group.Specialisation - @group.GroupName
+                    </button>
+                    <div class="float-right">
+                        <div class="row">
+                            <a class="btn btn-primary" asp-action="Edit" asp-route-groupId="@group.GroupId">Edit</a>
+                            <form asp-action="Delete" asp-route-groupId="@group.GroupId" method="POST">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </h5>
+            </div>
+
+            <div class="collapse" id="collapse-@group.GroupId" aria-labelledby="head-@group.GroupId" data-parent="#group-accordion">
+                <div class="card-body">
+                    <div>
+                        @await Html.PartialAsync("_StudentListPartial", group.Students)
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

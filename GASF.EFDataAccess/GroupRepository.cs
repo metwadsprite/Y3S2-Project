@@ -1,5 +1,6 @@
 ﻿using GASF.ApplicationLogic.Abstractions;
 using GASF.ApplicationLogic.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace GASF.EFDataAccess
 {
-    class GroupRepository : BaseRepository<Group>, IGroupRepository
+    public class GroupRepository : BaseRepository<Group>, IGroupRepository
     {
 
         public GroupRepository(StudentRecordDbContext dbContext): base(dbContext)
@@ -26,6 +27,18 @@ namespace GASF.EFDataAccess
             return dbContext.Groups.Where(group =>
                 group.Students.Contains(student)
             ).Single();
+        }
+
+        public Group GetById(Guid groupId)
+        {
+            return dbContext.Groups.Where(group =>
+                group.GroupId == groupId
+            ).Single();
+        }
+
+        public new IEnumerable<Group> GetAll()
+        {
+            return dbContext.Groups.Include(group => group.Students).AsEnumerable();
         }
     }
 }

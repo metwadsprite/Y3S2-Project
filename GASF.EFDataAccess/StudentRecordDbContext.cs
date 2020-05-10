@@ -41,6 +41,11 @@ namespace GASF.EFDataAccess
                 .HasOne(course => course.Exam)
                 .WithOne(exam => exam.Course)
                 .HasForeignKey<Exam>(exam => exam.CourseId);
+
+            modelBuilder.Entity<Student>()
+                .HasOne(student => student.Group)
+                .WithMany(group => group.Students)
+                .HasForeignKey(student => student.GroupId);
         }
     }
 }

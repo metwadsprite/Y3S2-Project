@@ -1,12 +1,5 @@
-﻿@model IEnumerable<GASF.ApplicationLogic.Data.Student>
+@model IEnumerable<GASF.ApplicationLogic.Data.Student>
 
-@{
-    ViewData["Title"] = "Index";
-}
-
-<p>
-    <a class="btn btn-primary" asp-controller="Students" asp-action="Create">Create new student</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -30,13 +23,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.LastName)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>   |
-                        <a asp-action="AllCertificates" asp-route-id="@item.Id">Documents</a> |
-                        <a asp-action="CreateCertificate" asp-route-id="@item.Id">Create Certificates</a>
                     </td>
                 </tr>
             }
