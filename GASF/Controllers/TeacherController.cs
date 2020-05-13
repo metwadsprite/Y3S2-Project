@@ -94,8 +94,15 @@ namespace GASF.Controllers
         {
             if (ModelState.IsValid)
             {
-                teacherService.AddExam(exam.Course.Name, exam.Date);
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    teacherService.AddExam(exam.Course.Name, exam.Date);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch(Exception)
+                {
+                    return BadRequest("You shold give a valid name for the exam's course.");
+                }
             }
             return View(exam);
         }

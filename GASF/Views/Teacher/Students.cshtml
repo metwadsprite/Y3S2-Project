@@ -18,8 +18,7 @@
             <td>@s.FirstName @s.LastName</td>
             <td>@s.Group.GroupName</td>
             <td>@s.Email</td>
-            <td>@Model.Grades.First(g => g.StudentId == s.Id).Score</td>
+            <td contenteditable="true">@Model.Grades.First(g => g.StudentId == s.Id).Score</td>
         </tr>
     }
-
 </table>

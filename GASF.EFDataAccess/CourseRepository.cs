@@ -20,14 +20,14 @@ namespace GASF.EFDataAccess
             return dbContext.Courses
                             .Include(c => c.Exam)
                             .Where(course => course.Id == id)
-                            .SingleOrDefault();
+                            .FirstOrDefault();
         }
 
         public Course GetCourseByName(string name)
         {
             return dbContext.Courses
                             .Where(course => course.Name == name)
-                            .SingleOrDefault();
+                            .FirstOrDefault();
         }
     }
 }
