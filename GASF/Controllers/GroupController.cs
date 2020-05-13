@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GASF.Controllers
 {
-    [Authorize(Policy = "Secretary")]
+    //[Authorize(Policy = "Secretary")]
     public class GroupController: Controller
     {
         private readonly GroupService groupService;

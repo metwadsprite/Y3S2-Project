@@ -10,6 +10,8 @@ namespace GASF.ApplicationLogic.Data
 
         public Student Student { get; set; }
 
+        public Guid StudentId { get; set; }
+
         public DateTime DueDate { get; set; }
 
         public int Value { get; set; }

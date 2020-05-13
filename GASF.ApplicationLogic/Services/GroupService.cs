@@ -13,14 +13,14 @@ namespace GASF.ApplicationLogic.Services
         {
             this.groupRepository = groupRepository;
         }
-        public IEnumerable<Group> GetGroupsByCourseId(string courseId)
+        public IEnumerable<Group> GetGroupsByCourseId(Guid courseId)
         {
-            Guid courseIdGuid = Guid.Empty;
-            if (!Guid.TryParse(courseId, out courseIdGuid))
-            {
-                throw new Exception("Invalid Guid Format");
-            }
-            return groupRepository.GetGroupsByCourseId(courseIdGuid);
+            //Guid courseIdGuid = Guid.Empty;
+            //if (!Guid.TryParse(courseId, out courseIdGuid))
+            //{
+            //    throw new Exception("Invalid Guid Format");
+            //}
+            return groupRepository.GetGroupsByCourseId(courseId);
         }
 
         public IEnumerable<Group> GetAll()
