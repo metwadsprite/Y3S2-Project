@@ -4,14 +4,16 @@ using GASF.EFDataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GASF.EFDataAccess.Migrations
 {
     [DbContext(typeof(StudentRecordDbContext))]
-    partial class StudentRecordDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200512083611_migr79")]
+    partial class migr79
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -206,7 +208,7 @@ namespace GASF.EFDataAccess.Migrations
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("StudentId")
+                    b.Property<Guid?>("StudentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Value")
@@ -392,9 +394,7 @@ namespace GASF.EFDataAccess.Migrations
                 {
                     b.HasOne("GASF.ApplicationLogic.Data.Student", "Student")
                         .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StudentId");
                 });
 
             modelBuilder.Entity("GASF.ApplicationLogic.Data.Student", b =>

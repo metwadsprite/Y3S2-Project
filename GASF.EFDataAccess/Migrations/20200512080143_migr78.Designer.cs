@@ -4,14 +4,16 @@ using GASF.EFDataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GASF.EFDataAccess.Migrations
 {
     [DbContext(typeof(StudentRecordDbContext))]
-    partial class StudentRecordDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200512080143_migr78")]
+    partial class migr78
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,7 +105,7 @@ namespace GASF.EFDataAccess.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("TeacherId")
+                    b.Property<Guid?>("TeacherId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -206,7 +208,7 @@ namespace GASF.EFDataAccess.Migrations
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("StudentId")
+                    b.Property<Guid?>("StudentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Value")
@@ -340,9 +342,7 @@ namespace GASF.EFDataAccess.Migrations
                 {
                     b.HasOne("GASF.ApplicationLogic.Data.Teacher", "Teacher")
                         .WithMany("Courses")
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TeacherId");
                 });
 
             modelBuilder.Entity("GASF.ApplicationLogic.Data.Exam", b =>
@@ -392,9 +392,7 @@ namespace GASF.EFDataAccess.Migrations
                 {
                     b.HasOne("GASF.ApplicationLogic.Data.Student", "Student")
                         .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StudentId");
                 });
 
             modelBuilder.Entity("GASF.ApplicationLogic.Data.Student", b =>

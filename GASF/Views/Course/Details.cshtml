@@ -1,0 +1,51 @@
+﻿@model GASF.Models.Courses.CourseDetails
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1> Course Details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Course)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Course.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Course.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Course.Description)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Teacher)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Teacher.FirstName)
+            @Html.DisplayFor(model => model.Teacher.LastName)
+        </dd>
+
+
+        @foreach (var item in Model.Groups)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayName("Group")
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(modelItem => item.GroupName)
+            </dd>
+        }
+
+
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Course.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
