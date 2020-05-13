@@ -37,7 +37,7 @@ namespace GASF.EFDataAccess
 
         public IEnumerable<Grade> GetStudentGrades(Guid id)
         {
-            return dbContext.Grades.Where(grade => grade.StudentId == id);
+            return dbContext.Grades.Include(g => g.Exam).Where(grade => grade.StudentId == id);
         }
 
         public IEnumerable<Course> GetStudentCourses(Guid id)
