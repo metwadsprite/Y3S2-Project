@@ -10,7 +10,7 @@ namespace GASF.ApplicationLogic.Services
          IEnumerable<Student> GetAllStudents();
          Student GetStudentById(Guid id);
          void AddStudent(Student student);
-        void EditStudent(Guid id, Student student);
+        void EditStudent(Student student);
 
         void DeleteStudent(Guid id);
 

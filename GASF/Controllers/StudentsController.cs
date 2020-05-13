@@ -13,26 +13,31 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GASF.Controllers
 {
-    
+    [Authorize(Policy = "Secretary")]
     public class StudentsController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly IStudentsService studentsService;
         private readonly ICertificatesForStudentsService certificateForStudentsService;
         private readonly ISecretaryService secretaryService;
+        private readonly GroupService groupService;
 
-        public StudentsController(UserManager<IdentityUser> userManager, IStudentsService studentsService,
-           ICertificatesForStudentsService certificateForStudentsService, ISecretaryService secretaryService)
-        {
+        public StudentsController(UserManager<IdentityUser> userManager,
+            IStudentsService studentsService,
+            ICertificatesForStudentsService certificateForStudentsService,
+            ISecretaryService secretaryService,
+            GroupService groupService
+        ) {
             this.studentsService = studentsService;
             this.userManager = userManager;
             this.certificateForStudentsService = certificateForStudentsService;
             this.secretaryService = secretaryService;
+            this.groupService = groupService;
         }
 
         // GET: Students
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             IEnumerable<Student> students = studentsService.GetAllStudents();
             return View(students);
@@ -40,7 +45,7 @@ namespace GASF.Controllers
 
         // GET: Students/Details/5
         [HttpGet]
-        public async Task<IActionResult> Details(Guid id)
+        public IActionResult Details(Guid id)
         {
             var student = studentsService.GetStudentById(id);
 
@@ -57,20 +62,27 @@ namespace GASF.Controllers
         // POST: Students/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [HttpPost]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Email,Adress,Phone,BirthDate,CNP")] Student student)
+        public IActionResult Create([FromForm] Student student)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
+            var atachedUser = userManager.Users
+                .AsEnumerable()
+                .Where(user => Guid.Parse(user.Id) == student.UserId)
+                .Single();
+            
+            student.Email = atachedUser.Email;
+            student.Phone = atachedUser.PhoneNumber;
+
             studentsService.AddStudent(student);
             return Redirect(Url.Action("Index", "Students"));
         }
 
         // GET: Students/Edit/5
         [HttpGet]
-        public async Task<IActionResult> Edit(Guid id)
+        public IActionResult Edit(Guid id)
         {
             var student = studentsService.GetStudentById(id);
             return View(student);
@@ -79,19 +91,19 @@ namespace GASF.Controllers
         // POST: Students/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,FirstName,LastName,Email,Adress,Phone,BirthDate,CNP")] Student student)
+        public IActionResult Edit([FromForm] Student student)
         {
 
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            studentsService.EditStudent(id, student);
-            return View(student);
+            studentsService.EditStudent(student);
+            return RedirectToAction("Index");
         }
 
         // GET: Students/Delete/5
-        public async Task<IActionResult> Delete(Guid id)
+        public IActionResult Delete(Guid id)
         {
             var student = studentsService.GetStudentById(id);
             return View(student);
@@ -100,7 +112,7 @@ namespace GASF.Controllers
         // POST: Students/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public IActionResult DeleteConfirmed(Guid id)
         {
             studentsService.DeleteStudent(id);
             return RedirectToAction(nameof(Index));
@@ -117,7 +129,7 @@ namespace GASF.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<IActionResult> CreateCertificate(Guid Id,[Bind("Title,Message,Date")] CertificateForStudent certificateForStudent)
+        public IActionResult CreateCertificate(Guid Id, [Bind("Title,Message,Date")] CertificateForStudent certificateForStudent)
         {
             if (!ModelState.IsValid)
             {
@@ -125,14 +137,14 @@ namespace GASF.Controllers
             }
             var userId = userManager.GetUserId(User);
             var secretaryId = secretaryService.GetSecretaryByUserId(userId);
-            certificateForStudentsService.createCertificateForStudent(certificateForStudent, Id, secretaryId.Id) ;
+            certificateForStudentsService.createCertificateForStudent(certificateForStudent, Id, secretaryId.Id);
             //
             return Redirect(Url.Action("Index", "Students"));
         }
 
         // GET: Students/Details/5
         [HttpGet]
-        public async Task<IActionResult> CertificateDetails(Guid id)
+        public IActionResult CertificateDetails(Guid id)
         {
             var certificate = certificateForStudentsService.GetCertificateById(id);
             var studentC = studentsService.GetStudentById(certificate.IdStudent);
@@ -141,17 +153,17 @@ namespace GASF.Controllers
             CertificateForStudentView certificateForStudentView = new CertificateForStudentView()
             {
                 certificateForStudent = certificate,
-                student=studentC,
-                secretary=secretary
-                
-              
+                student = studentC,
+                secretary = secretary
+
+
             };
             return View(certificateForStudentView);
         }
 
         // GET: Students
         [HttpGet]
-        public async Task<IActionResult> AllCertificates(Guid id)
+        public IActionResult AllCertificates(Guid id)
         {
 
             IEnumerable<CertificateForStudent> certificates = certificateForStudentsService.GetCertificatesForStudent(id);

@@ -22,5 +22,36 @@ namespace GASF.ApplicationLogic.Services
             }
             return groupRepository.GetGroupsByCourseId(courseIdGuid);
         }
+
+        public IEnumerable<Group> GetAll()
+        {
+            return groupRepository.GetAll();
+        }
+
+        public void Add(Group group)
+        {
+            groupRepository.Add(group);
+        }
+
+        public Group GetById(Guid groupId)
+        {
+            return groupRepository.GetById(groupId);
+        }
+
+        public void Delete(Group group)
+        {
+            groupRepository.Delete(group);
+        }
+
+        public void Update(Group group)
+        {
+            groupRepository.Update(group);
+        }
+
+        public void AddStudentToGroup(Student student, Group group)
+        {
+            group.Students.Add(student);
+            groupRepository.Update(group);
+        }
     }
 }

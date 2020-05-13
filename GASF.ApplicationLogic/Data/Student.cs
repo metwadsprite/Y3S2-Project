@@ -23,7 +23,6 @@ namespace GASF.ApplicationLogic.Data
         public string CNP { get; set; }
 
         public Group Group { get; set; }
-
-        //public Guid GroupId { get; set; }
+        public Guid GroupId { get; set; }
     }
 }

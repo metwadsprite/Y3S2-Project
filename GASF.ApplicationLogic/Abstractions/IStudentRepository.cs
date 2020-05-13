@@ -22,6 +22,8 @@ namespace GASF.ApplicationLogic.Abstractions
 
         IEnumerable<Grade> GetStudentGrades(Guid id);
         
-        ICollection<Student> GetStudentByGroupId(Guid GropupId);   
+        ICollection<Student> GetStudentByGroupId(Guid GropupId);
+        
+        Student GetStudentByUserId(Guid userId);
     }
 }

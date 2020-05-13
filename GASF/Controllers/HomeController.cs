@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GASF.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -20,11 +21,6 @@ namespace GASF.Controllers
         }
 
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
         {
             return View();
         }

@@ -1,4 +1,9 @@
-﻿@model GASF.ApplicationLogic.Data.Teacher
+﻿@using GASF.ApplicationLogic.Data;
+@using GASF.ApplicationLogic.Services;
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<IdentityUser> UserManager;
+@inject UserService UserService;
+@model Teacher;
 
 @{
     ViewData["Title"] = "Create";
@@ -11,35 +16,36 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" method="POST">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
+                <label asp-for="FirstName" class="control-label">First name</label>
                 <input asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
+                <label asp-for="LastName" class="control-label">Last name</label>
                 <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BirthDate" class="control-label"></label>
-                <input asp-for="BirthDate" class="form-control" />
+                <label asp-for="BirthDate" class="control-label">Birth date</label>
+                <input asp-for="BirthDate" class="form-control" type="date" value=""/>
                 <span asp-validation-for="BirthDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="UserId" class="control-label">User account</label>
+                <select asp-for="UserId" class="custom-select">
+                    @foreach (var user in UserManager.Users.AsEnumerable().Where(user => !UserService.IsUserTeacher(Guid.Parse(user.Id))))
+                    {
+                        <option value="@user.Id">@user.Email</option>
+                    }
+                </select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" />
             </div>
         </form>
     </div>

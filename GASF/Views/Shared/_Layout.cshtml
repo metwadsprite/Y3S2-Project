@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using GASF.ApplicationLogic.Services;
+@using Microsoft.AspNetCore.Identity;
+@inject UserService UserService;
+@inject UserManager<IdentityUser> UserManager;
+@inject SignInManager<IdentityUser> SignInManager;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -22,9 +28,35 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            @if (UserService.IsUserStudent(Guid.Parse(UserManager.GetUserId(User))))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Index">Student</a>
+                                </li>
+                            }
+                            @if (UserService.IsUserTeacher(Guid.Parse(UserManager.GetUserId(User))))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Teacher" asp-action="Index">Teacher</a>
+                                </li>
+                            }
+                            @if (UserService.IsUserSecretary(Guid.Parse(UserManager.GetUserId(User))))
+                            {
+                                <li class="nav-item">
+                                    <div class="dropdown show">
+                                        <a class="nav-link text-dark dropdown-toggle" href="#" role="button" id="secretaryMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Secretary</a>
+
+                                        <div class="dropdown-menu" aria-labelledby="secretaryMenu">
+                                            <a class="dropdown-item" asp-controller="Group" asp-action="Index">Student groups</a>
+                                            <a class="dropdown-item" asp-controller="Students" asp-action="Index">Students</a>
+                                            <a class="dropdown-item" asp-controller="Teachers" asp-action="Index">Teachers</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
                     </ul>
                 </div>
             </div>
@@ -36,11 +68,6 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - GASF - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

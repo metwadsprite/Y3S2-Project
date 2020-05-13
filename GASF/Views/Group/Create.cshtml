@@ -1,0 +1,36 @@
+@using GASF.ApplicationLogic.Data;
+@model Group;
+
+@{
+    ViewData["Title"] = "Create student group";
+}
+
+<p>
+    <h4>Create student group</h4>
+</p>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="POST">
+            <div class="form-group">
+                <label class="control-label" asp-for="GroupName">Group name</label>
+                <input class="form-control" asp-for="GroupName">
+                <span class="text-danger" asp-validation-for="GroupName"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" asp-for="Specialisation">Specialisation</label>
+                <input class="form-control" asp-for="Specialisation">
+                <span class="text-danger" asp-validation-for="Specialisation"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
