@@ -65,9 +65,9 @@ namespace GASF.ApplicationLogic.Services
             return studentRepository?.GetStudentGrades(userIdGuid);
         }
 
-        public Grade GetStudentExamGrade(string userId, string examId)
+        public Grade GetStudentExamGrade(string studId, string examId)
         {
-            IEnumerable<Grade> studentGrades = this.GetStudentGrade(userId);
+            IEnumerable<Grade> studentGrades = this.GetStudentGrade(studId);
             Guid examIdGuid = Guid.Empty;
             if (!Guid.TryParse(examId, out examIdGuid))
             {

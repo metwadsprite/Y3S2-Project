@@ -44,10 +44,10 @@ namespace GASF.EFDataAccess
             {
                 if (group.GroupCourses.Any(g => g.CourseId == courseId))
                 {
-                    Student student = dbContext.Students
+                    IEnumerable<Student> studList = dbContext.Students
                         .Where(s => s.Group.GroupId == group.GroupId)
-                        .SingleOrDefault();
-                    students.Add(student);
+                        .AsEnumerable();
+                    students.AddRange(studList);
                 }
             }
             return students;

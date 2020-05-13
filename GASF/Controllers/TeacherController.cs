@@ -75,7 +75,7 @@ namespace GASF.Controllers
                 List<Grade> grades = new List<Grade>();
                 foreach(var s in students)
                 {
-                    grades.Add(studentService.GetStudentExamGrade(s.UserId.ToString(), course.Exam.Id.ToString()));
+                    grades.Add(studentService.GetStudentExamGrade(s.Id.ToString(), course.Exam.Id.ToString()));
                 }
                 return View(new TeacherCourseEnrolledStudents { Teacher = teacher, Course = course, Students = students, Grades = grades });
             }
