@@ -1,4 +1,5 @@
 ﻿@model GASF.Models.Students.TeacherCourseEnrolledStudents;
+@using System.Linq;
 @{
     ViewData["Title"] = "";
 }
@@ -18,7 +19,21 @@
             <td>@s.FirstName @s.LastName</td>
             <td>@s.Group.GroupName</td>
             <td>@s.Email</td>
-            <td contenteditable="true">@Model.Grades.First(g => g.StudentId == s.Id).Score</td>
+            @if (@Model.Grades.FirstOrDefault(g => g.StudentId == s.Id) == null)
+            {
+                <td contenteditable="true">-</td>
+
+            }
+            else
+            {
+                <td contenteditable="true">@Model.Grades.First(g => g.StudentId == s.Id).Score</td>
+            }
         </tr>
     }
 </table>
+<div class="row">
+    <div class="col-8"></div>
+    <div class="col-4" align="right">
+        <a href='@Url.Action("Students", "Teacher")' class="btn btn-primary">Save Changes</a>
+    </div>
+</div>
