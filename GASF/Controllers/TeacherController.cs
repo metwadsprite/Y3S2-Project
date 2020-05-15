@@ -86,10 +86,14 @@ namespace GASF.Controllers
             }
         }
         [HttpPost]
-        //public IActionResult Students([FromForm]IEnumerable TeacherCourseEnrolledStudents)
-        //{
-
-        //}
+        public IActionResult Students([Bind("Grades")]TeacherCourseEnrolledStudents stud)
+        {
+            foreach(var g in stud.Grades)
+            {
+                //teacherService.EditGrade(g);
+            }
+            return View(stud);
+        }
         [HttpGet]
         public IActionResult ExamCreate()
         {

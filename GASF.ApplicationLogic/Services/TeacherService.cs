@@ -14,12 +14,14 @@ namespace GASF.ApplicationLogic.Services
         private ITeacherRepository teacherRepository;
         private ICourseRepository courseRepository;
         private IExamRepository examRepository;
+        //private IGradeRepository gradeRepository;
 
         public TeacherService(ITeacherRepository teacherRepository, ICourseRepository courseRepository, IExamRepository examRepository)
         {
             this.teacherRepository = teacherRepository;
             this.courseRepository = courseRepository;
             this.examRepository = examRepository;
+            //this.gradeRepository = gradeRepository;
         }
         public Teacher GetById(string id)
         {
@@ -92,5 +94,9 @@ namespace GASF.ApplicationLogic.Services
             Course course = courseRepository.GetCourseByName(courseName);
             examRepository.Add(new Exam() { Id = Guid.NewGuid(), Course = course, Date = date});
         }
+        //public void EditGrade(Grade grade)
+        //{
+        //    gradeRepository.Update(grade);
+        //}
     }
 }
