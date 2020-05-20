@@ -22,11 +22,6 @@ namespace GASF.ApplicationLogic.Services
 
         public Student GetStudentById(Guid id)
         {
-            if (id == null)
-            {
-                throw new Exception("Student id is null");
-            }
-
             var student= studentRepository.GetStudentById(id);
 
             if(student==null)
