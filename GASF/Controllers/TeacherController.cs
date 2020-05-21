@@ -56,7 +56,7 @@ namespace GASF.Controllers
             {
                 var userId = userManager.GetUserId(User);
                 Teacher teacher = teacherService.GetTeacherByUserId(userId);
-                IEnumerable<Exam> exams = teacherService.GetExams(userId);
+                IEnumerable<Exam> exams = teacherService.GetExams(teacher.Id.ToString());
                 return View(new TeacherExamViewModel { Teacher = teacher, Exams = exams });
             }
             catch (Exception)

@@ -9,5 +9,6 @@ namespace GASF.ApplicationLogic.Abstractions
     {
         Course GetCourseById(Guid id);
         Course GetCourseByName(string name);
+        IEnumerable<Course> GetTeacherCourses(Guid userId);
     }
 }
