@@ -14,12 +14,14 @@ namespace GASF.ApplicationLogic.Services
         private ITeacherRepository teacherRepository;
         private ICourseRepository courseRepository;
         private IExamRepository examRepository;
+        //private IGradeRepository gradeRepository;
 
         public TeacherService(ITeacherRepository teacherRepository, ICourseRepository courseRepository, IExamRepository examRepository)
         {
             this.teacherRepository = teacherRepository;
             this.courseRepository = courseRepository;
             this.examRepository = examRepository;
+            //this.gradeRepository = gradeRepository;
         }
         public Teacher GetById(string id)
         {
@@ -45,11 +47,6 @@ namespace GASF.ApplicationLogic.Services
         }
         public IEnumerable<Student> GetCourseStudents(Guid courseId)
         {
-            //Guid courseIdGuid = Guid.Empty;
-            //if (!Guid.TryParse(courseId, out courseIdGuid))
-            //{
-            //    throw new Exception("Invalid Guid Format");
-            //}
             return teacherRepository.GetTeacherCourseStudents(courseId);
         }
         public IEnumerable<Exam> GetExams(string userId)
@@ -70,7 +67,12 @@ namespace GASF.ApplicationLogic.Services
             {
                 throw new Exception("Invalid Guid Format");
             }
-            return teacherRepository.GetTeacherByUserId(userIdGuid);
+            var teacher = teacherRepository.GetTeacherByUserId(userIdGuid);
+            if (teacher == null)
+            {
+                throw new EntityNotFoundException(userIdGuid);
+            }
+            return teacher;
         }
 
         public void AddCourse(string userId, string courseName, string courseDescription)
@@ -92,5 +94,9 @@ namespace GASF.ApplicationLogic.Services
             Course course = courseRepository.GetCourseByName(courseName);
             examRepository.Add(new Exam() { Id = Guid.NewGuid(), Course = course, Date = date});
         }
+        //public void EditGrade(Grade grade)
+        //{
+        //    gradeRepository.Update(grade);
+        //}
     }
 }

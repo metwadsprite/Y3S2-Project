@@ -73,7 +73,12 @@ namespace GASF.ApplicationLogic.Services
             {
                 throw new Exception("Invalid Guid Format");
             }
-            return studentGrades.Where(g => g.Exam.Id == examIdGuid).FirstOrDefault();
+            Grade grade = studentGrades.Where(g => g.Exam.Id == examIdGuid).FirstOrDefault();
+            if(grade == null)
+            {
+                grade = new Grade();
+            }
+            return grade;
         }
         public IEnumerable<SchoolFee> GetSchoolFee(string id)
         {

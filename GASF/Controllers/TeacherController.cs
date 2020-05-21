@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Routing;
 using GASF.Models.Exams;
 using GASF.Models.Students;
+using System.Collections;
 
 namespace GASF.Controllers
 {
@@ -83,6 +84,15 @@ namespace GASF.Controllers
             {
                 return BadRequest("Invalid request received ");
             }
+        }
+        [HttpPost]
+        public IActionResult Students([Bind("Grades")]TeacherCourseEnrolledStudents stud)
+        {
+            foreach(var g in stud.Grades)
+            {
+                //teacherService.EditGrade(g);
+            }
+            return View(stud);
         }
         [HttpGet]
         public IActionResult ExamCreate()

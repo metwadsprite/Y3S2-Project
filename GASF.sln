@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GASF.ApplicationLogic", "GA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GASF.EFDataAccess", "GASF.EFDataAccess\GASF.EFDataAccess.csproj", "{4F1EFDF6-8D3E-4E60-8A4C-204E7A6B56E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GASF.ApplicationLogic.Test", "GASF.ApplicationLogic.Test\GASF.ApplicationLogic.Test.csproj", "{579B20A8-67B7-49FF-9661-EC68889D5E7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GASF.ApplicationLogic.Test", "GASF.ApplicationLogic.Test\GASF.ApplicationLogic.Test.csproj", "{6D75FE7A-999C-49A6-9B8C-7C97892146A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{4F1EFDF6-8D3E-4E60-8A4C-204E7A6B56E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F1EFDF6-8D3E-4E60-8A4C-204E7A6B56E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F1EFDF6-8D3E-4E60-8A4C-204E7A6B56E9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{579B20A8-67B7-49FF-9661-EC68889D5E7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{579B20A8-67B7-49FF-9661-EC68889D5E7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{579B20A8-67B7-49FF-9661-EC68889D5E7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{579B20A8-67B7-49FF-9661-EC68889D5E7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D75FE7A-999C-49A6-9B8C-7C97892146A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D75FE7A-999C-49A6-9B8C-7C97892146A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D75FE7A-999C-49A6-9B8C-7C97892146A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D75FE7A-999C-49A6-9B8C-7C97892146A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
