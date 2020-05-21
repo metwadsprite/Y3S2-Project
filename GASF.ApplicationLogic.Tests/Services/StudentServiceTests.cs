@@ -155,7 +155,7 @@ namespace GASF.ApplicationLogic.Tests.Services
                 studentService.GetSchoolFee(invalidID);
             });
         }
-
+         [TestMethod]
             public void GetSchoolFee_ReturnSchoolFee_WhenUserIdHasValidValue()
             {
                 Mock<IStudentRepository> studentRepoMoq = new Mock<IStudentRepository>();
