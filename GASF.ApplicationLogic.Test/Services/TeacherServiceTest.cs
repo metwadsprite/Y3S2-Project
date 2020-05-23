@@ -209,7 +209,7 @@ namespace GASF.ApplicationLogic.Test.Services
             Mock<ITeacherRepository> teacherRepoMock = new Mock<ITeacherRepository>();
             Mock<ICourseRepository> courseRepoMock = new Mock<ICourseRepository>();
             Mock<IExamRepository> examRepoMock = new Mock<IExamRepository>();
-            var userId = Guid.Parse("f216e1eb-128b-4c31-930d-4fb400d885cc");
+            var courseId = Guid.Parse("f216e1eb-128b-4c31-930d-4fb400d885cc");
             Exception throwException = null;
 
             var student1 = new Student
@@ -228,14 +228,14 @@ namespace GASF.ApplicationLogic.Test.Services
             var teacherStudents = new List<Student>();
             teacherStudents.Add(student1);
             teacherStudents.Add(student2);
-            teacherRepoMock.Setup(teacherRepo => teacherRepo.GetTeacherCourseStudents(userId)).Returns(teacherStudents);
+            teacherRepoMock.Setup(teacherRepo => teacherRepo.GetTeacherCourseStudents(courseId)).Returns(teacherStudents);
 
             TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object);
             IEnumerable<Student> returnedStudents = null;
 
             try
             {
-                returnedStudents = teacherService.GetCourseStudents(userId);
+                returnedStudents = teacherService.GetCourseStudents(courseId);
             }
             catch (Exception e)
             {
