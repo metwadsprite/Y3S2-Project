@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GASF.ApplicationLogic.Tests.Services
+namespace GASF.ApplicationLogic.Test.Services
 {
     [TestClass]
     public class SecretaryServiceTests

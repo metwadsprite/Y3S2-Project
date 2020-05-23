@@ -7,7 +7,7 @@ using GASF.ApplicationLogic.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace GASF.ApplicationLogic.Tests.Services
+namespace GASF.ApplicationLogic.Test.Services
 {
     [TestClass]
     public class UserServiceTests
