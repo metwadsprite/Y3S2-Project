@@ -41,23 +41,20 @@ namespace GASF.ApplicationLogic.Services
                 throw new Exception("Invalid Guid Format");
             }
 
-            return courseRepository.GetAll()
-                            .Where(course => course.Teacher != null && course.Teacher.UserId == userIdGuid)
-                            .AsEnumerable();
+            return courseRepository.GetTeacherCourses(userIdGuid);
         }
-        public IEnumerable<Student> GetCourseStudents(Guid courseId)
+        public IEnumerable<Student> GetCourseStudents(Guid userId)
         {
-            return teacherRepository.GetTeacherCourseStudents(courseId);
+            return teacherRepository.GetTeacherCourseStudents(userId);
         }
-        public IEnumerable<Exam> GetExams(string userId)
+        public IEnumerable<Exam> GetExams(string teacherId)
         {
-            Guid userIdGuid = Guid.Empty;
-            if (!Guid.TryParse(userId, out userIdGuid))
+            Guid teacherIdGuid = Guid.Empty;
+            if (!Guid.TryParse(teacherId, out teacherIdGuid))
             {
                 throw new Exception("Invalid Guid Format");
             }
-            Teacher teacher = GetTeacherByUserId(userId);
-            return examRepository.GetTeacherExams(teacher.Id)
+            return examRepository.GetTeacherExams(teacherIdGuid)
                             .AsEnumerable();
         }
         public Teacher GetTeacherByUserId(string userId)

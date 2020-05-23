@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Text;
 using GASF.ApplicationLogic.Data;
 using GASF.ApplicationLogic.Exceptions;
+using System.Linq;
+using System.Reflection;
 
 namespace GASF.ApplicationLogic.Test.Services
 {
@@ -143,6 +145,162 @@ namespace GASF.ApplicationLogic.Test.Services
 
             Assert.IsNull(throwException, $"Exception thrown.");
             Assert.IsNotNull(user);
+        }
+        [TestMethod]
+        public void GetCourses_ThrowsException_WhenCourseUserIdHasInvalidValue()
+        {
+            Mock<ITeacherRepository> teacherRepoMock = new Mock<ITeacherRepository>();
+            Mock<ICourseRepository> courseRepoMock = new Mock<ICourseRepository>();
+            Mock<IExamRepository> examRepoMock = new Mock<IExamRepository>();
+            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object);
+            var invalidUserId = "blabla hah dfghj ps";
+
+            Assert.ThrowsException<Exception>(() => {
+                teacherService.GetCourses(invalidUserId);
+            });
+        }
+        [TestMethod]
+        public void GetCourses_Returns_Courses()
+        {
+            Mock<ITeacherRepository> teacherRepoMock = new Mock<ITeacherRepository>();
+            Mock<ICourseRepository> courseRepoMock = new Mock<ICourseRepository>();
+            Mock<IExamRepository> examRepoMock = new Mock<IExamRepository>();
+            var userId = Guid.Parse("f216e1eb-128b-4c31-930d-4fb400d885cc");
+            Exception throwException = null;
+
+            var course1 = new Course
+            {
+                Id = Guid.NewGuid(),
+                Description = "description",
+                Name = "name"
+            };
+            var course2 = new Course
+            {
+                Id = Guid.NewGuid(),
+                Description = "description2",
+                Name = "name2"
+            };
+
+            var teacherCourses = new List<Course>();
+            teacherCourses.Add(course1);
+            teacherCourses.Add(course2);
+            courseRepoMock.Setup(courseRepo => courseRepo.GetTeacherCourses(userId)).Returns(teacherCourses);
+
+            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object);
+            IEnumerable<Course> returnedCourses = null;
+
+            try
+            {
+                returnedCourses = teacherService.GetCourses(userId.ToString());
+            }
+            catch (Exception e)
+            {
+                throwException = e;
+            }
+
+            Assert.IsNull(throwException, $"Exception thrown.");
+            Assert.IsNotNull(returnedCourses);
+            Assert.AreEqual(teacherCourses.Count, returnedCourses.Count());
+            Assert.AreEqual("description", returnedCourses.FirstOrDefault().Description);
+        }
+        [TestMethod]
+        public void GetCourseStudents_Returns_Students()
+        {
+            Mock<ITeacherRepository> teacherRepoMock = new Mock<ITeacherRepository>();
+            Mock<ICourseRepository> courseRepoMock = new Mock<ICourseRepository>();
+            Mock<IExamRepository> examRepoMock = new Mock<IExamRepository>();
+            var courseId = Guid.Parse("f216e1eb-128b-4c31-930d-4fb400d885cc");
+            Exception throwException = null;
+
+            var student1 = new Student
+            {
+                Id = Guid.NewGuid(),
+                Adress = "address",
+                FirstName = "Ionel"
+            };
+            var student2 = new Student
+            {
+                Id = Guid.NewGuid(),
+                Adress = "address2",
+                FirstName = "Maria"
+            };
+
+            var teacherStudents = new List<Student>();
+            teacherStudents.Add(student1);
+            teacherStudents.Add(student2);
+            teacherRepoMock.Setup(teacherRepo => teacherRepo.GetTeacherCourseStudents(courseId)).Returns(teacherStudents);
+
+            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object);
+            IEnumerable<Student> returnedStudents = null;
+
+            try
+            {
+                returnedStudents = teacherService.GetCourseStudents(courseId);
+            }
+            catch (Exception e)
+            {
+                throwException = e;
+            }
+
+            Assert.IsNull(throwException, $"Exception thrown.");
+            Assert.IsNotNull(returnedStudents);
+            Assert.AreEqual(teacherStudents.Count, returnedStudents.Count());
+            Assert.AreEqual("Ionel", returnedStudents.FirstOrDefault().FirstName);
+        }
+        [TestMethod]
+        public void GetExams_ThrowsException_WhenTeacherIdHasInvalidValue()
+        {
+            Mock<ITeacherRepository> teacherRepoMock = new Mock<ITeacherRepository>();
+            Mock<ICourseRepository> courseRepoMock = new Mock<ICourseRepository>();
+            Mock<IExamRepository> examRepoMock = new Mock<IExamRepository>();
+            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object);
+            var invalidTeacherId = "blabla hah dfghj ps";
+
+            Assert.ThrowsException<Exception>(() => {
+                teacherService.GetExams(invalidTeacherId);
+            });
+        }
+        [TestMethod]
+        public void GetExams_Returns_Exams()
+        {
+            Mock<ITeacherRepository> teacherRepoMock = new Mock<ITeacherRepository>();
+            Mock<ICourseRepository> courseRepoMock = new Mock<ICourseRepository>();
+            Mock<IExamRepository> examRepoMock = new Mock<IExamRepository>();
+            var teacherId = Guid.Parse("f216e1eb-128b-4c31-930d-4fb400d885cc");
+            Exception throwException = null;
+
+            var exam1 = new Exam
+            {
+                Id = Guid.NewGuid(),
+                Date = new DateTime(2020, 08, 08)
+            };
+            var exam2 = new Exam
+            {
+                Id = Guid.NewGuid(),
+                Date = new DateTime(2020, 07, 07)
+            };
+
+            var teacherExams = new List<Exam>();
+            teacherExams.Add(exam1);
+            teacherExams.Add(exam2);
+            examRepoMock.Setup(examRepo => examRepo.GetTeacherExams(teacherId)).Returns(teacherExams);
+
+            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object);
+            IEnumerable<Exam> returnedExams = null;
+
+            try
+            {
+                returnedExams = teacherService.GetExams(teacherId.ToString());
+            }
+            catch (Exception e)
+            {
+                throwException = e;
+            }
+
+            Assert.IsNull(throwException, $"Exception thrown.");
+            Assert.IsNotNull(returnedExams);
+            Assert.AreEqual(teacherExams.Count, returnedExams.Count());
+            Assert.AreEqual(new DateTime(2020, 08, 08), returnedExams.FirstOrDefault().Date);
         }
     }
 }

@@ -29,5 +29,11 @@ namespace GASF.EFDataAccess
                             .Where(course => course.Name == name)
                             .FirstOrDefault();
         }
+
+        public IEnumerable<Course> GetTeacherCourses(Guid userId)
+        {
+            return GetAll().Where(course => course.Teacher != null && course.Teacher.UserId == userId)
+                            .AsEnumerable();
+        }
     }
 }
