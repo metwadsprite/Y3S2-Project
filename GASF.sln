@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GASF.EFDataAccess", "GASF.E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GASF.ApplicationLogic.Test", "GASF.ApplicationLogic.Test\GASF.ApplicationLogic.Test.csproj", "{6D75FE7A-999C-49A6-9B8C-7C97892146A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GASF.ApplicationLogic.Tests", "GASF.ApplicationLogic.Tests\GASF.ApplicationLogic.Tests.csproj", "{667E0970-25F2-4A18-9756-3884DF1D993A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

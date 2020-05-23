@@ -25,13 +25,5 @@ namespace GASF.Controllers
         {            
             return View();
         }
-
-        // Functionality should be handled thorugh backoffice
-        // This is purely for testing purposes
-        public IActionResult MakeMeSecretary()
-        {
-            userService.MakeUserSecretary(Guid.Parse(userManager.GetUserId(User)));
-            return RedirectToAction("Index");
-        }
     }
 }
