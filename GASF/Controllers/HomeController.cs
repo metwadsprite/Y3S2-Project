@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using GASF.Models;
 using Microsoft.AspNetCore.Authorization;
+using GASF.ApplicationLogic.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace GASF.Controllers
 {
@@ -14,10 +16,16 @@ namespace GASF.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly UserService userService;
+        private readonly UserManager<IdentityUser> userManager;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
+        public HomeController(ILogger<HomeController> logger,
+            UserService userService,
+            UserManager<IdentityUser> userManager
+        ) {
             _logger = logger;
+            this.userService = userService;
+            this.userManager = userManager;            
         }
 
         public IActionResult Index()
@@ -29,6 +37,14 @@ namespace GASF.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        // Functionality should be handled thorugh backoffice
+        // This is purely for testing purposes
+        public IActionResult MakeMeSecretary()
+        {
+            userService.MakeUserSecretary(Guid.Parse(userManager.GetUserId(User)));
+            return RedirectToAction("Index");
         }
     }
 }

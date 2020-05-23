@@ -50,11 +50,7 @@ namespace GASF.ApplicationLogic.Services
 
         public Teacher GetTeacherById(Guid id)
         {
-            if (id == null)
-            {
-                throw new Exception("Teacher id is null");
-            }
-
+     
             var teacher = teacherRepository.GetTeacherById(id);
 
             if (teacher == null)
