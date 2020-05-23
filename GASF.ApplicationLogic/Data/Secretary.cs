@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace GASF.ApplicationLogic.Data
@@ -17,5 +18,25 @@ namespace GASF.ApplicationLogic.Data
 
         public string PhoneNumber { get; set; }
 
+        public ICollection<Student> Students { get; private set; }
+        public ICollection<SchoolFee> Fees { get; private set; }
+
+        //public Secretary()
+        //{
+        //    Students = new List<Student>();
+        //    Fees = new List<SchoolFee>();
+        //}
+
+        //public IReadOnlyCollection<Student> GetTotalFeesForEachStudents(double fee)
+        //{ 
+        //    var studentList = new List<Student>();
+        //    foreach(var student in Students)
+        //    {
+        //        var totalFee = Fees.Where(f => f.StudentId == student.Id)
+        //                            .Sum(f => f.Value);
+
+        //    }
+        //    return studentList.AsReadOnly();
+        //}
     }
 }
