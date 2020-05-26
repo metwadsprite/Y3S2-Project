@@ -56,7 +56,7 @@ namespace GASF.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View(new Teacher());
+            return View();
         }
 
         // POST: Teachers/Create
@@ -103,7 +103,7 @@ namespace GASF.Controllers
                 return BadRequest();
             }
             teachersService.EditTeacher(id, teacher);
-            return View(teacher);
+            return RedirectToAction("Index");
         }
 
         // GET: Teachers/Delete/5
