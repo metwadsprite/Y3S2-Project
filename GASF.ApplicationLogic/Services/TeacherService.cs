@@ -104,11 +104,16 @@ namespace GASF.ApplicationLogic.Services
             {
                 throw new Exception("You did not give an existing student name.");
             }
-            if(gradeRepository.GetGradeByStudentId(stud.Id).ExamId == exam.Id)
+            Grade grade = gradeRepository.GetGradeByStudentId(stud.Id);
+            if (grade != null && grade.ExamId == exam.Id)
             {
-                gradeRepository.Update(new Grade() { Student = stud, Exam = exam, Score = score });
+                grade.Score = score;
+                gradeRepository.Update(grade);
             }
-            gradeRepository.Add(new Grade() { Id = Guid.NewGuid(), Student = stud, Exam = exam, Score = score });
+            else
+            {
+                gradeRepository.Add(new Grade() { Id = Guid.NewGuid(), Student = stud, Exam = exam, Score = score });
+            }
         }
     }
 }
