@@ -12,6 +12,7 @@ namespace GASF.ApplicationLogic.Abstractions
         Student GetByUserId(Guid Id);
 
         ICollection<Student> GetStudentByFirstName(string FirstName);
+        Student GetStudentByName(string LastName, string FirstName);
 
         Student GetStudentByCNP(string CNP);
 

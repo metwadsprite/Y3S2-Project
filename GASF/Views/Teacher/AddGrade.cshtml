@@ -1,0 +1,37 @@
+﻿@model GASF.Models.Grades.TeacherAddGradeViewModel;
+@{
+    ViewData["Title"] = "AddGrade";
+}
+
+<h1>AddGrade</h1>
+
+<form asp-action="AddGrade" method="post">
+
+    <div class="form-group">
+        <label asp-for="StudentFirstName" class="control-label"></label>
+        <input asp-for="StudentFirstName" class="form-control" />
+        <span asp-validation-for="StudentFirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="StudentLastName" class="control-label"></label>
+        <input asp-for="StudentLastName" class="form-control" />
+        <span asp-validation-for="StudentLastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CourseName" class="control-label"></label>
+        <input asp-for="CourseName" class="form-control" />
+        <span asp-validation-for="CourseName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Score" class="control-label"></label>
+        <input asp-for="Score" class="form-control" />
+        <span asp-validation-for="Score" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-5"></div>
+        <div class="col-4">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+</form>

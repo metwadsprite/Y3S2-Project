@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Routing;
 using GASF.Models.Exams;
 using GASF.Models.Students;
 using System.Collections;
+using GASF.Models.Grades;
 
 namespace GASF.Controllers
 {
@@ -85,15 +86,6 @@ namespace GASF.Controllers
                 return BadRequest("Invalid request received ");
             }
         }
-        [HttpPost]
-        public IActionResult Students([Bind("Grades")]TeacherCourseEnrolledStudents stud)
-        {
-            foreach(var g in stud.Grades)
-            {
-                //teacherService.EditGrade(g);
-            }
-            return View(stud);
-        }
         [HttpGet]
         public IActionResult ExamCreate()
         {
@@ -131,6 +123,22 @@ namespace GASF.Controllers
             var userId = userManager.GetUserId(User);
             teacherService.AddCourse(userId, model.Name, model.Description);
             return Redirect(Url.Action("Index", "Teacher"));
+        }
+        [HttpGet]
+        public IActionResult AddGrade()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddGrade([FromForm]TeacherAddGradeViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            teacherService.AddGrade(model.Score, model.CourseName, model.StudentFirstName, model.StudentLastName);
+
+            return RedirectToAction("Index");
         }
     }
 }

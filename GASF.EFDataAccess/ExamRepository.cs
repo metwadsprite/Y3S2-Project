@@ -51,6 +51,15 @@ namespace GASF.EFDataAccess
             return dbContext.Exams.Find(id);
         }
 
+        public Exam GetExamByCourseName(string courseName)
+        {
+            return dbContext
+                .Exams
+                .Include(e => e.Course)
+                .Where(e => e.Course.Name == courseName)
+                .FirstOrDefault();
+        }
+
         public ICollection<Exam> GetExamByDate(DateTime date)
         {
             return dbContext.Exams.Where(exam => exam.Date == date).ToList();

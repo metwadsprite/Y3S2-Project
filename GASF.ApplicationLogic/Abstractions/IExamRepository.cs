@@ -10,5 +10,6 @@ namespace GASF.ApplicationLogic.Abstractions
         ICollection<Exam> GetGroupExams(Guid groupId);
         IEnumerable<Exam> GetTeacherExams(Guid teacherId);
         ICollection<Exam> GetExamByDate(DateTime date);
+        Exam GetExamByCourseName(string courseName);
     }
 }

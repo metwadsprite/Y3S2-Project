@@ -21,7 +21,10 @@ namespace GASF.ApplicationLogic.Test.Services
             Mock<ITeacherRepository> teacherRepoMock = new Mock<ITeacherRepository>();
             Mock<ICourseRepository> courseRepoMock = new Mock<ICourseRepository>();
             Mock<IExamRepository> examRepoMock = new Mock<IExamRepository>();
-            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object);
+            Mock<IGradeRepository> gradeRepoMock = new Mock<IGradeRepository>();
+            Mock<IStudentRepository> studRepoMock = new Mock<IStudentRepository>();
+
+            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object, gradeRepoMock.Object, studRepoMock.Object);
             var invalidUserId = "blabla hah dfghj ps";
 
             Assert.ThrowsException<Exception>(() => {
@@ -34,6 +37,11 @@ namespace GASF.ApplicationLogic.Test.Services
             Mock<ITeacherRepository> teacherRepoMock = new Mock<ITeacherRepository>();
             Mock<ICourseRepository> courseRepoMock = new Mock<ICourseRepository>();
             Mock<IExamRepository> examRepoMock = new Mock<IExamRepository>();
+            Mock<IGradeRepository> gradeRepoMock = new Mock<IGradeRepository>();
+            Mock<IStudentRepository> studRepoMock = new Mock<IStudentRepository>();
+
+            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object, gradeRepoMock.Object, studRepoMock.Object);
+
             var id = Guid.Parse("f216e1eb-128b-4c31-930d-4fb400d885cc");
             Exception throwException = null;
 
@@ -50,7 +58,6 @@ namespace GASF.ApplicationLogic.Test.Services
             teacherRepoMock.Setup(teacherRepo => teacherRepo.GetTeacherById(id))
                             .Returns(teacher);
 
-            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object);
             teacher = null;
 
             try
@@ -71,7 +78,10 @@ namespace GASF.ApplicationLogic.Test.Services
             Mock<ITeacherRepository> teacherRepoMock = new Mock<ITeacherRepository>();
             Mock<ICourseRepository> courseRepoMock = new Mock<ICourseRepository>();
             Mock<IExamRepository> examRepoMock = new Mock<IExamRepository>();
-            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object);
+            Mock<IGradeRepository> gradeRepoMock = new Mock<IGradeRepository>();
+            Mock<IStudentRepository> studRepoMock = new Mock<IStudentRepository>();
+
+            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object, gradeRepoMock.Object, studRepoMock.Object);
             var invalidUserId = "blabla hah dfghj ps";
 
             Assert.ThrowsException<Exception>(() => {
@@ -85,6 +95,11 @@ namespace GASF.ApplicationLogic.Test.Services
             Mock<ITeacherRepository> teacherRepoMock = new Mock<ITeacherRepository>();
             Mock<IExamRepository> examRepoMock = new Mock<IExamRepository>();
             Mock<ICourseRepository> courseRepoMock = new Mock<ICourseRepository>();
+            Mock<IGradeRepository> gradeRepoMock = new Mock<IGradeRepository>();
+            Mock<IStudentRepository> studRepoMock = new Mock<IStudentRepository>();
+
+            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object, gradeRepoMock.Object, studRepoMock.Object);
+
             var nonExistingUserId = "f216e1eb-128b-4c31-930d-4fb400d333cc";
             var existingUserId = Guid.Parse("f216e1eb-128b-4c31-930d-4fb400d885cc");
 
@@ -102,8 +117,6 @@ namespace GASF.ApplicationLogic.Test.Services
             teacherRepoMock.Setup(teacherRepo => teacherRepo.GetTeacherByUserId(existingUserId))
                             .Returns(teacher);
 
-            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object);
-
             Assert.ThrowsException<EntityNotFoundException>(() => {
                 teacherService.GetTeacherByUserId(nonExistingUserId);
             });
@@ -115,6 +128,11 @@ namespace GASF.ApplicationLogic.Test.Services
             Mock<ITeacherRepository> teacherRepoMock = new Mock<ITeacherRepository>();
             Mock<ICourseRepository> courseRepoMock = new Mock<ICourseRepository>();
             Mock<IExamRepository> examRepoMock = new Mock<IExamRepository>();
+            Mock<IGradeRepository> gradeRepoMock = new Mock<IGradeRepository>();
+            Mock<IStudentRepository> studRepoMock = new Mock<IStudentRepository>();
+
+            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object, gradeRepoMock.Object, studRepoMock.Object);
+
             var userId = Guid.Parse("f216e1eb-128b-4c31-930d-4fb400d885cc");
             Exception throwException = null;
 
@@ -131,7 +149,6 @@ namespace GASF.ApplicationLogic.Test.Services
             teacherRepoMock.Setup(teacherRepo => teacherRepo.GetTeacherByUserId(userId))
                             .Returns(teacher);
 
-            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object);
             Teacher user = null;
 
             try
@@ -152,7 +169,11 @@ namespace GASF.ApplicationLogic.Test.Services
             Mock<ITeacherRepository> teacherRepoMock = new Mock<ITeacherRepository>();
             Mock<ICourseRepository> courseRepoMock = new Mock<ICourseRepository>();
             Mock<IExamRepository> examRepoMock = new Mock<IExamRepository>();
-            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object);
+            Mock<IGradeRepository> gradeRepoMock = new Mock<IGradeRepository>();
+            Mock<IStudentRepository> studRepoMock = new Mock<IStudentRepository>();
+
+            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object, gradeRepoMock.Object, studRepoMock.Object);
+
             var invalidUserId = "blabla hah dfghj ps";
 
             Assert.ThrowsException<Exception>(() => {
@@ -165,6 +186,11 @@ namespace GASF.ApplicationLogic.Test.Services
             Mock<ITeacherRepository> teacherRepoMock = new Mock<ITeacherRepository>();
             Mock<ICourseRepository> courseRepoMock = new Mock<ICourseRepository>();
             Mock<IExamRepository> examRepoMock = new Mock<IExamRepository>();
+            Mock<IGradeRepository> gradeRepoMock = new Mock<IGradeRepository>();
+            Mock<IStudentRepository> studRepoMock = new Mock<IStudentRepository>();
+
+            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object, gradeRepoMock.Object, studRepoMock.Object);
+
             var userId = Guid.Parse("f216e1eb-128b-4c31-930d-4fb400d885cc");
             Exception throwException = null;
 
@@ -186,7 +212,6 @@ namespace GASF.ApplicationLogic.Test.Services
             teacherCourses.Add(course2);
             courseRepoMock.Setup(courseRepo => courseRepo.GetTeacherCourses(userId)).Returns(teacherCourses);
 
-            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object);
             IEnumerable<Course> returnedCourses = null;
 
             try
@@ -209,6 +234,11 @@ namespace GASF.ApplicationLogic.Test.Services
             Mock<ITeacherRepository> teacherRepoMock = new Mock<ITeacherRepository>();
             Mock<ICourseRepository> courseRepoMock = new Mock<ICourseRepository>();
             Mock<IExamRepository> examRepoMock = new Mock<IExamRepository>();
+            Mock<IGradeRepository> gradeRepoMock = new Mock<IGradeRepository>();
+            Mock<IStudentRepository> studRepoMock = new Mock<IStudentRepository>();
+
+            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object, gradeRepoMock.Object, studRepoMock.Object);
+
             var courseId = Guid.Parse("f216e1eb-128b-4c31-930d-4fb400d885cc");
             Exception throwException = null;
 
@@ -230,7 +260,6 @@ namespace GASF.ApplicationLogic.Test.Services
             teacherStudents.Add(student2);
             teacherRepoMock.Setup(teacherRepo => teacherRepo.GetTeacherCourseStudents(courseId)).Returns(teacherStudents);
 
-            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object);
             IEnumerable<Student> returnedStudents = null;
 
             try
@@ -253,7 +282,11 @@ namespace GASF.ApplicationLogic.Test.Services
             Mock<ITeacherRepository> teacherRepoMock = new Mock<ITeacherRepository>();
             Mock<ICourseRepository> courseRepoMock = new Mock<ICourseRepository>();
             Mock<IExamRepository> examRepoMock = new Mock<IExamRepository>();
-            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object);
+            Mock<IGradeRepository> gradeRepoMock = new Mock<IGradeRepository>();
+            Mock<IStudentRepository> studRepoMock = new Mock<IStudentRepository>();
+
+            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object, gradeRepoMock.Object, studRepoMock.Object);
+
             var invalidTeacherId = "blabla hah dfghj ps";
 
             Assert.ThrowsException<Exception>(() => {
@@ -266,6 +299,11 @@ namespace GASF.ApplicationLogic.Test.Services
             Mock<ITeacherRepository> teacherRepoMock = new Mock<ITeacherRepository>();
             Mock<ICourseRepository> courseRepoMock = new Mock<ICourseRepository>();
             Mock<IExamRepository> examRepoMock = new Mock<IExamRepository>();
+            Mock<IGradeRepository> gradeRepoMock = new Mock<IGradeRepository>();
+            Mock<IStudentRepository> studRepoMock = new Mock<IStudentRepository>();
+
+            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object, gradeRepoMock.Object, studRepoMock.Object);
+
             var teacherId = Guid.Parse("f216e1eb-128b-4c31-930d-4fb400d885cc");
             Exception throwException = null;
 
@@ -285,7 +323,6 @@ namespace GASF.ApplicationLogic.Test.Services
             teacherExams.Add(exam2);
             examRepoMock.Setup(examRepo => examRepo.GetTeacherExams(teacherId)).Returns(teacherExams);
 
-            TeacherService teacherService = new TeacherService(teacherRepoMock.Object, courseRepoMock.Object, examRepoMock.Object);
             IEnumerable<Exam> returnedExams = null;
 
             try

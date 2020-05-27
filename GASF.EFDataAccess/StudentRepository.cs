@@ -80,5 +80,12 @@ namespace GASF.EFDataAccess
         {
             return dbContext.Students.Where(s => s.UserId == userId).Single();
         }
+
+        public Student GetStudentByName(string LastName, string FirstName)
+        {
+            return dbContext.Students
+                            .Where(student => student.FirstName == FirstName && student.LastName == LastName)
+                            .FirstOrDefault();
+        }
     }
 }

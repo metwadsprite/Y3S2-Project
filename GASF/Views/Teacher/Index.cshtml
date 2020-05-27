@@ -19,8 +19,6 @@
             <td>@course.Name</td>
             <td>@course.Description</td>
             <td>
-               @* @Html.ActionLink("Select", "Students", "Teacher", new { id = course.Id.ToString })*@
-                @*@Html.Hidden(course.Id)*@
                 <a asp-action="Students" asp-route-id="@course.Id">Select</a>
             </td>
         </tr>
@@ -28,5 +26,6 @@
 
 </table>
 <a href='@Url.Action("Create", "Teacher")' class="btn btn-primary">Add a new course</a>
-<a href='@Url.Action("Exams", "Teacher")' class="btn btn-primary">View your exams</a>
 <a href='@Url.Action("ExamCreate", "Teacher")' class="btn btn-primary">Add an exam</a>
+<a href='@Url.Action("Exams", "Teacher")' class="btn btn-primary">View your exams</a>
+<a href='@Url.Action("AddGrade", "Teacher")' class="btn btn-primary">Add grade</a>

@@ -51,14 +51,14 @@ namespace GASF.Controllers
             {
                 return NotFound();
             }
-            Course gradeView = new Course();
+            Exam gradeView = new Exam();
             var userId = userManager.GetUserId(User);
             var student = studentService.GetByUserId(userId);
             //IEnumerable<Course> courses = studentService.GetStudentCourses(userId);
             IEnumerable<Grade> grades = studentService.GetStudentGrade(userId);
 
 
-            gradeView.Grades = grades;
+            gradeView.Grades = (ICollection<Grade>)grades;
 
             if (student == null)
             {

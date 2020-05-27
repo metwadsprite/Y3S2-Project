@@ -14,14 +14,16 @@ namespace GASF.ApplicationLogic.Services
         private ITeacherRepository teacherRepository;
         private ICourseRepository courseRepository;
         private IExamRepository examRepository;
-        //private IGradeRepository gradeRepository;
+        private IGradeRepository gradeRepository;
+        private IStudentRepository studentRepository;
 
-        public TeacherService(ITeacherRepository teacherRepository, ICourseRepository courseRepository, IExamRepository examRepository)
+        public TeacherService(ITeacherRepository teacherRepository, ICourseRepository courseRepository, IExamRepository examRepository, IGradeRepository gradeRepository, IStudentRepository studentRepository)
         {
             this.teacherRepository = teacherRepository;
             this.courseRepository = courseRepository;
             this.examRepository = examRepository;
-            //this.gradeRepository = gradeRepository;
+            this.gradeRepository = gradeRepository;
+            this.studentRepository = studentRepository;
         }
         public Teacher GetById(string id)
         {
@@ -71,7 +73,6 @@ namespace GASF.ApplicationLogic.Services
             }
             return teacher;
         }
-
         public void AddCourse(string userId, string courseName, string courseDescription)
         {
             Guid userIdGuid = Guid.Empty;
@@ -89,11 +90,25 @@ namespace GASF.ApplicationLogic.Services
         public void AddExam(string courseName, DateTime date)
         {
             Course course = courseRepository.GetCourseByName(courseName);
-            examRepository.Add(new Exam() { Id = Guid.NewGuid(), Course = course, Date = date});
+            examRepository.Add(new Exam() { Id = Guid.NewGuid(), Course = course, Date = date });
         }
-        //public void EditGrade(Grade grade)
-        //{
-        //    gradeRepository.Update(grade);
-        //}
+        public void AddGrade(int score, string examName, string studentFirstName, string studentLastName)
+        {
+            Exam exam = examRepository.GetExamByCourseName(examName);
+            Student stud = studentRepository.GetStudentByName(studentLastName, studentFirstName);
+            if(exam == null)
+            {
+                throw new Exception("You did not give an existing course name.");
+            }
+            if (stud == null)
+            {
+                throw new Exception("You did not give an existing student name.");
+            }
+            if(gradeRepository.GetGradeByStudentId(stud.Id).ExamId == exam.Id)
+            {
+                gradeRepository.Update(new Grade() { Student = stud, Exam = exam, Score = score });
+            }
+            gradeRepository.Add(new Grade() { Id = Guid.NewGuid(), Student = stud, Exam = exam, Score = score });
+        }
     }
 }
